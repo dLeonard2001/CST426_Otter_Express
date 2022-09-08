@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e6a1ff4a0753543b00f0185e8bc185, type: 3}
+  m_Name: Order2
+  m_EditorClassIdentifier: 
+  orderId: 2
+  baseShellReward: 10
+  tipPotential: 7
+  customersMessage: FOOOOOOD NOW!
+  customersOrder: 1x Burger 1x Fries 1x Drink
+  foodTemperature: 120
+  orderAcceptTimer: 60
+  pickUpLocation: {fileID: 3455510539436987318, guid: 1099c0c98cbb61847931fb17e07d30a8, type: 3}
+  deliveryLocation: {fileID: 4777738945244286197, guid: 507e87002d399694293266af7476a815, type: 3}
+  myPickUpLocation: {x: 0, y: 0, z: 0}
+  myDeliveryLocation: {x: 0, y: 5, z: 10}
