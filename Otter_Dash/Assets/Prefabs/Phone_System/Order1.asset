@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 148bd69eeb9c1384a987e47af6d1e2b4, type: 3}
+  m_Name: Order1
+  m_EditorClassIdentifier: 
+  orderId: 0
+  baseShellReward: 0
+  tipPotential: 0
+  customersMessage: 
+  customersOrder: 
+  foodTemperature: 0
+  orderAcceptTimer: 0
+  pickUpLocation: {fileID: 0}
+  deliveryLocation: {fileID: 0}
+  myPickUpLocation: {x: 0, y: 0, z: 0}
+  myDeliveryLocation: {x: 0, y: 0, z: 0}
