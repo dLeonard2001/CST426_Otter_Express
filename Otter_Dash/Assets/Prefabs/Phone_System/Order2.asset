@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148bd69eeb9c1384a987e47af6d1e2b4, type: 3}
   m_Name: Order2
   m_EditorClassIdentifier: 
-  orderId: 0
+  orderId: 2
   baseShellReward: 0
   tipPotential: 0
   customersMessage: 
   customersOrder: 
   foodTemperature: 0
   orderAcceptTimer: 0
-  pickUpLocation: {fileID: 0}
-  deliveryLocation: {fileID: 0}
+  pickUpLocation: {fileID: 3455510539436987318, guid: cc89638d77c96e7458df6043fb9b9a8c, type: 3}
+  deliveryLocation: {fileID: 4777738945244286197, guid: 6a9c3e4cec3c0074593db80c327d0138, type: 3}
   myPickUpLocation: {x: 0, y: 0, z: 0}
   myDeliveryLocation: {x: 0, y: 0, z: 0}
