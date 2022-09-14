@@ -26,6 +26,7 @@ namespace Command
 
         [Header("Camera")] 
         public Camera mainCamera;
+        public CameraController camController;
 
         // Start is called before the first frame update
         void Start()
@@ -52,7 +53,18 @@ namespace Command
 
         public void GetInput()
         {
-            // transform.rotation = Quaternion.Euler(0f, mainCamera.transform.eulerAngles.y, 0f);
+            // unlock the player
+            if (inputManager.UnlockMouse())
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+
             if (inputManager.Forward())
             {
                 moveForward.Execute(boxTrans, moveForward, speedMultiplier, rotate, playerMoving);
@@ -65,7 +77,7 @@ namespace Command
                 playerMoving = true;
             }
             
-            if (!inputManager.Forward() && !inputManager.Forward())
+            if (!inputManager.Forward() && !inputManager.Backward())
                 playerMoving = false;
 
             if (inputManager.Left())

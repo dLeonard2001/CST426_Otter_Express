@@ -65,4 +65,9 @@ public class InputManager : MonoBehaviour
         return playerControls.player.Right.IsPressed();
     }
 
+    public bool UnlockMouse()
+    {
+        return playerControls.player.UnlockMouse.IsPressed();
+    }
+
 }

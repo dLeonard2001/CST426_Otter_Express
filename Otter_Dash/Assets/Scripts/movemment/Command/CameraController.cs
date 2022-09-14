@@ -12,7 +12,7 @@ public class CameraController : CinemachineExtension
     [SerializeField] 
     public float verticalSpeed = 5f;
     [SerializeField] 
-    public bool tilt;
+    public bool isMouseLocked = true;
 
     private InputManager inputManager;
     private Vector3 startingRotation;
@@ -26,7 +26,7 @@ public class CameraController : CinemachineExtension
     {
         if (vcam.Follow)
         {
-            if (stage == CinemachineCore.Stage.Aim)
+            if (stage == CinemachineCore.Stage.Aim && isMouseLocked)
             {
                 Vector2 deltaInput = inputManager.GetMouseDelta();
                 startingRotation.x += deltaInput.x * verticalSpeed * Time.deltaTime;
