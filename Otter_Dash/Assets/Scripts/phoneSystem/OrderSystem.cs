@@ -16,15 +16,9 @@ public class OrderSystem : MonoBehaviour
     public Order activeOrder;
 
     private bool playerAcceptedOrder;
-
-    public GameObject acceptDeclinePanel;
-    public GameObject pickUpText;
     
-    //Pick up/ dropoff timer, TODO: work on pick up and drop of timers
-    private float pickUpTimer = 3f;
-    private float dropOffTimer = 3f;
-
     public bool orderPickedUp = false;
+    public bool orderDelivered = false;
 
     private GameObject deliveryLocation;
     private GameObject pickUpLocation;
@@ -38,70 +32,15 @@ public class OrderSystem : MonoBehaviour
         instance = this;
     }
     
-    
-    //A quick way to recieve an order (press space to recieve order). TODO: add a way new way for orders to get to player
-    private void Update()
-    {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && activeOrder == null)
-        {
-            Debug.Log("Sending accept or decline to phone");
-            SendOrderToPhone();
-        }
-    }
 
-
-    //Send order to player's phone. To be accepted or declined.
-    void SendOrderToPhone()
-    {
-        acceptDeclinePanel.SetActive(true);
-    }
-
-
-    //Accept the order
-    public void AcceptOrder()
-    {
-        //player accepts order
-        playerAcceptedOrder = true;
-        //take random order and make as new active order.
-        AddOrder();
-        Debug.Log("Order has been accepted" );
-        
-
-        
-        //TODO: display pickup location for food.
-        if (activeOrder == null)
-        {
-            return;
-        }
-        acceptDeclinePanel.SetActive(false);
-        PickUpAtRestaurant();
-    }
-
-    
-    //Display pick up order text
-    public void PickUpAtRestaurant()
-    {
-        pickUpText.GetComponent<UnityEngine.UI.Text>().text = "Pick up order at the restaurant";
-    }
-    
-    
-    //Decline the order
-    public void DeclineOrder()
-    {
-        playerAcceptedOrder = false;
-        acceptDeclinePanel.SetActive(false);
-        Debug.Log("Order declined!");
-    }
-    
-    
-
-    void AddOrder()
+    public void AddOrder()
     {
         if (activeOrder == null)
         {
             activeOrder = myOrders[Random.Range(0, myOrders.Count)];
             Debug.Log("new order taken");
             pickUpLocation = Instantiate(activeOrder.pickUpLocation, activeOrder.myPickUpLocation, Quaternion.identity);
+            orderDelivered = false;
         }
     }
 
@@ -123,9 +62,6 @@ public class OrderSystem : MonoBehaviour
             //order complete
             orderPickedUp = false;
             Debug.Log("You have delivered the order!");
-            //give reward
-            Debug.Log("Take these shells!");
-            //update phone
 
             //Order done
             activeOrder = null;
@@ -141,8 +77,7 @@ public class OrderSystem : MonoBehaviour
         if (other.CompareTag("PickUpLocation") && orderPickedUp == false)
         {
             orderPickedUp = true;
-            pickUpText.GetComponent<UnityEngine.UI.Text>().text = "Food is hot and ready. Go to the delivery location!";
-            
+
             Debug.Log("Order has been picked up!");
 
             //spawn the delivery location after picking up food.
@@ -160,8 +95,9 @@ public class OrderSystem : MonoBehaviour
             Debug.Log("Order is being given to customer!");
             instance.CompleteOrder(activeOrder.orderId);
 
-            //Display order complete text, Function
-            StartCoroutine(DisplayedOrderCompleteText());
+            orderPickedUp = false;
+            orderDelivered = true;
+
             
             //Delete the delivery location marker
             Destroy(deliveryLocation, 0.0f);
@@ -169,21 +105,7 @@ public class OrderSystem : MonoBehaviour
 
     }
 
-    
-    //Order complete text
-    IEnumerator DisplayedOrderCompleteText()
-    {
-        //Display order complete text
-        pickUpText.GetComponent<UnityEngine.UI.Text>().text = "Order Complete!";
 
-        //Display text for 3 seconds only.
-        yield return new WaitForSeconds(3f);
-        
-
-          
-        //Display goes blank again TODO: return player to home page on phone.
-        pickUpText.GetComponent<UnityEngine.UI.Text>().text = "";
-    }
         
         
         
