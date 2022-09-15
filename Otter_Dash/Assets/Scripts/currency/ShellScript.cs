@@ -10,6 +10,7 @@ public class ShellScript : MonoBehaviour
     private Rigidbody _rigidbody;
     private SpriteRenderer _spriteRenderer;
     private ShellCounter shellCounter;
+    private HeatControl heatControl;
 
 
     private enum State
@@ -20,12 +21,13 @@ public class ShellScript : MonoBehaviour
     public float bounciness = 0.2f;
     public float diAppearTime = 5.0f;
     public string type;
-    public int worth;
+    [SerializeField] [Range(0,100)] private float worth;
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        heatControl = FindObjectOfType<HeatControl>();
         shellCounter = FindObjectOfType<ShellCounter>();
         state = State.Active;
     }
@@ -46,11 +48,15 @@ public class ShellScript : MonoBehaviour
             state = State.InActive;
             Debug.Log("touching car");
             StartCoroutine(appearAfter(diAppearTime));
-            
+
             if (type == "coin")
             {
                 shellCounter.updateCoinCount(worth);
+            }else if (type == "heat")
+            {
+                heatControl.addMoreHeatToFood(worth);
             }
+
         }
 
         

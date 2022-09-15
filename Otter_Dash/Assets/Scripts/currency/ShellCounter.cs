@@ -7,9 +7,12 @@ using UnityEngine.PlayerLoop;
 public class ShellCounter : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI coinCountUI;
+
     // Start is called before the first frame update
     void Start()
     {
+        
+        //Debug.Log(bag.keepWarmStrength);
         coinCountUI = GetComponent<TextMeshProUGUI>();
     }
 
@@ -19,7 +22,7 @@ public class ShellCounter : MonoBehaviour
         
     }
 
-    public void updateCoinCount(int count)
+    public void updateCoinCount(float count)
     {
         coinCountUI.text = (int.Parse(coinCountUI.text) + count).ToString();
     }
