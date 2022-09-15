@@ -110,10 +110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c642bd695568a46817e17cdc7062bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bag: {fileID: 0}
   bounciness: 0.2
   diAppearTime: 5
-  type: 
-  worth: 5
+  type: heat
+  worth: 0.05
 --- !u!54 &8808116906324952542
 Rigidbody:
   m_ObjectHideFlags: 0
