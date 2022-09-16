@@ -80,6 +80,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pull_out_Phone"",
+                    ""type"": ""Button"",
+                    ""id"": ""40d2b0e5-e3e0-4fc7-8b81-4a1483511168"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -148,6 +157,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""UnlockMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a9fa04c-c4ea-4175-943c-fade0277ac00"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull_out_Phone"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -162,6 +182,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_player_Right = m_player.FindAction("Right", throwIfNotFound: true);
         m_player_LookAround = m_player.FindAction("LookAround", throwIfNotFound: true);
         m_player_UnlockMouse = m_player.FindAction("UnlockMouse", throwIfNotFound: true);
+        m_player_Pull_out_Phone = m_player.FindAction("Pull_out_Phone", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +248,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_player_Right;
     private readonly InputAction m_player_LookAround;
     private readonly InputAction m_player_UnlockMouse;
+    private readonly InputAction m_player_Pull_out_Phone;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -237,6 +259,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Right => m_Wrapper.m_player_Right;
         public InputAction @LookAround => m_Wrapper.m_player_LookAround;
         public InputAction @UnlockMouse => m_Wrapper.m_player_UnlockMouse;
+        public InputAction @Pull_out_Phone => m_Wrapper.m_player_Pull_out_Phone;
         public InputActionMap Get() { return m_Wrapper.m_player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -264,6 +287,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @UnlockMouse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUnlockMouse;
                 @UnlockMouse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUnlockMouse;
                 @UnlockMouse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUnlockMouse;
+                @Pull_out_Phone.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPull_out_Phone;
+                @Pull_out_Phone.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPull_out_Phone;
+                @Pull_out_Phone.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPull_out_Phone;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -286,6 +312,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @UnlockMouse.started += instance.OnUnlockMouse;
                 @UnlockMouse.performed += instance.OnUnlockMouse;
                 @UnlockMouse.canceled += instance.OnUnlockMouse;
+                @Pull_out_Phone.started += instance.OnPull_out_Phone;
+                @Pull_out_Phone.performed += instance.OnPull_out_Phone;
+                @Pull_out_Phone.canceled += instance.OnPull_out_Phone;
             }
         }
     }
@@ -298,5 +327,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnRight(InputAction.CallbackContext context);
         void OnLookAround(InputAction.CallbackContext context);
         void OnUnlockMouse(InputAction.CallbackContext context);
+        void OnPull_out_Phone(InputAction.CallbackContext context);
     }
 }

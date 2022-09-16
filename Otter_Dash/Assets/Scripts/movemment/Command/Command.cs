@@ -15,7 +15,7 @@ namespace Command
 
 
         //Move and maybe save command
-        public abstract void Execute(Rigidbody boxRB, Command command, int speedMulti, float rotate, bool direction);
+        public abstract void Execute(Rigidbody boxRB, RectTransform rect, Command command, int speedMulti, float rotate, bool direction);
 
         //Move the box
         public virtual void Move(Rigidbody boxRB, int speedMulti, float rotate){}
@@ -23,7 +23,7 @@ namespace Command
 
     public class MoveForward : Command
     {
-        public override void Execute(Rigidbody boxRB, Command command, int speedMulti, float rotate, bool direction)
+        public override void Execute(Rigidbody boxRB, RectTransform rect, Command command, int speedMulti, float rotate, bool direction)
         {
             Move(boxRB, speedMulti, rotate);
         }
@@ -46,7 +46,7 @@ namespace Command
 
     public class MoveBackward : Command
     {
-        public override void Execute(Rigidbody boxRB, Command command, int speedMulti, float rotate, bool direction)
+        public override void Execute(Rigidbody boxRB, RectTransform rect, Command command, int speedMulti, float rotate, bool direction)
         {
             Move(boxRB, speedMulti, rotate);
         }
@@ -69,7 +69,7 @@ namespace Command
 
     public class MoveLeft : Command
     {
-        public override void Execute(Rigidbody boxRB, Command command, int speedMulti, float rotate, bool direction)
+        public override void Execute(Rigidbody boxRB, RectTransform rect, Command command, int speedMulti, float rotate, bool direction)
         {
             
             IncreaseRotation(boxRB, direction);
@@ -88,7 +88,7 @@ namespace Command
 
     public class MoveRight : Command
     {
-        public override void Execute(Rigidbody boxRB, Command command, int speedMulti, float rotate, bool direction)
+        public override void Execute(Rigidbody boxRB, RectTransform rect, Command command, int speedMulti, float rotate, bool direction)
         {
             
             IncreaseRotation(boxRB, direction);
@@ -106,9 +106,30 @@ namespace Command
         }
     }
 
+    public class PullOutPhone : Command
+    {
+        public override void Execute(Rigidbody boxRB, RectTransform rect, Command command, int speedMulti, float rotate, bool direction)
+        {
+            movePhone(rect);
+        }
+        public void movePhone(RectTransform boxTrans)
+        {
+            // 0 -> on screen
+            // -600 -> off screen
+            if (boxTrans.position.y < 0)
+            {
+                while (boxTrans.position.y < 0)
+                {
+                    boxTrans.position += new Vector3(0, 50 * Time.deltaTime, 0);
+                }
+            }
+
+        }
+    }
+
     public class EmptyInput : Command
     {
-        public override void Execute(Rigidbody boxTrans, Command command, int speedMulti, float rotate, bool direction)
+        public override void Execute(Rigidbody boxRB, RectTransform rect, Command command, int speedMulti, float rotate, bool direction)
         {
             // no key is binded
         }

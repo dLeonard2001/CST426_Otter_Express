@@ -526,6 +526,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 389647536}
     m_Modifications:
+    - target: {fileID: 3586643640101355376, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3586643640101355376, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3586643640101355376, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3586643640101355376, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3586643640101355376, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3586643640101355376, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3586643640180218018, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -596,7 +620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3586643640180218018, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -600
       objectReference: {fileID: 0}
     - target: {fileID: 3586643640180218018, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -798,6 +822,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2541737573085870648, guid: 9d4a918cad1d4ef44a3d4193d94eb3eb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541737573085870648, guid: 9d4a918cad1d4ef44a3d4193d94eb3eb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541737573538075080, guid: 9d4a918cad1d4ef44a3d4193d94eb3eb, type: 3}
+      propertyPath: Damping.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541737573538075080, guid: 9d4a918cad1d4ef44a3d4193d94eb3eb, type: 3}
+      propertyPath: Damping.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541737573538075080, guid: 9d4a918cad1d4ef44a3d4193d94eb3eb, type: 3}
+      propertyPath: Damping.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2541737574033799172, guid: 9d4a918cad1d4ef44a3d4193d94eb3eb, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -858,6 +902,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 747842399}
+    - target: {fileID: 2541737574204828375, guid: 9d4a918cad1d4ef44a3d4193d94eb3eb, type: 3}
+      propertyPath: playerPhone
+      value: 
+      objectReference: {fileID: 954117228}
     - target: {fileID: 2541737574204828375, guid: 9d4a918cad1d4ef44a3d4193d94eb3eb, type: 3}
       propertyPath: inputManager
       value: 

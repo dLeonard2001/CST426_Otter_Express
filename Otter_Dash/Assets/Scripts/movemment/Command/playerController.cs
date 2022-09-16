@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Command
 {
@@ -11,12 +12,14 @@ namespace Command
         [Header("Player Object")] 
         public InputManager inputManager;
         public Rigidbody boxTrans;
+        public RectTransform playerPhone;
         public int speedMultiplier;
         public static List<Command> pressedCommands = new List<Command>();
         private Vector2 movement;
-        private Command moveForward, moveBackward, moveLeft, moveRight;
+        private Command moveForward, moveBackward, moveLeft, moveRight, movePhone;
         private float rotate;
         private bool playerMoving;
+        private bool phoneMoving;
 
         [Header("Replay")]
         public static bool startReplay;
@@ -39,6 +42,7 @@ namespace Command
             moveBackward = new MoveBackward();
             moveLeft = new MoveLeft();
             moveRight = new MoveRight();
+            movePhone = new PullOutPhone();
             rotate = 0f;
         }
 
@@ -67,13 +71,13 @@ namespace Command
 
             if (inputManager.Forward())
             {
-                moveForward.Execute(boxTrans, moveForward, speedMultiplier, rotate, playerMoving);
+                moveForward.Execute(boxTrans, playerPhone, moveForward, speedMultiplier, rotate, playerMoving);
                 playerMoving = true;
             }
 
             if (inputManager.Backward())
             {
-                moveBackward.Execute(boxTrans, moveBackward, speedMultiplier, rotate, playerMoving);
+                moveBackward.Execute(boxTrans, playerPhone, moveBackward, speedMultiplier, rotate, playerMoving);
                 playerMoving = true;
             }
             
@@ -82,14 +86,30 @@ namespace Command
 
             if (inputManager.Left())
             {
-                moveLeft.Execute(boxTrans, moveBackward, speedMultiplier, rotate, playerMoving);
+                moveLeft.Execute(boxTrans, playerPhone, moveBackward, speedMultiplier, rotate, playerMoving);
             }
 
             if (inputManager.Right())
             {
-                moveRight.Execute(boxTrans, moveBackward, speedMultiplier, rotate, playerMoving);
+                moveRight.Execute(boxTrans, playerPhone, moveBackward, speedMultiplier, rotate, playerMoving);
+            }
+            
+            if (inputManager.PullOutPhone() && !phoneMoving)
+            {
+                movePhone.Execute(boxTrans, playerPhone, moveForward, speedMultiplier, rotate, playerMoving);
+                phoneMoving = true;
             }
 
+            if (phoneMoving)
+            {
+                if (playerPhone.position.y == 0)
+                {
+                    phoneMoving = true;
+                }else if (playerPhone.position.y == -600)
+                {
+                    phoneMoving = true;
+                }
+            }
             
         }
     } 

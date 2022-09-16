@@ -70,4 +70,9 @@ public class InputManager : MonoBehaviour
         return playerControls.player.UnlockMouse.IsPressed();
     }
 
+    public bool PullOutPhone()
+    {
+        return playerControls.player.Pull_out_Phone.IsPressed();
+    }
+
 }
