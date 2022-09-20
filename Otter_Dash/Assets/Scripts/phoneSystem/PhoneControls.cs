@@ -3,12 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class PhoneControls : MonoBehaviour
 {
 
+
+    //Sliding phone up and down
+    [Header("Phone being used")] 
+    public bool phoneUp;
+
+    //Settings Screen
+    [Header("Settings App")] 
+    public GameObject settingsPanel;
+    
+    
     [Header("Top block of Phone")]
     //Home page title text(top block of phone)
     public TextMeshProUGUI titleText;
@@ -30,8 +41,13 @@ public class PhoneControls : MonoBehaviour
     public GameObject acceptDeclineButtons;
     
     
+    //Phone animations
+    private Animator phoneAnimator;
 
-    
+
+
+
+
     //Phone states (Not sure if actually needed(mostly not)
     public enum PhoneState
     {
@@ -51,6 +67,7 @@ public class PhoneControls : MonoBehaviour
     void Start()
     {
         currentPhoneState = PhoneState.homePage;
+        phoneAnimator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -65,6 +82,18 @@ public class PhoneControls : MonoBehaviour
             orderText.text = "Order delivered!";
             OrderDelivered();
         }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            phoneAnimator.Play("PhoneUp");
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            phoneAnimator.Play("PhoneDown");
+        }
+        
+        
     }
 
 
@@ -209,7 +238,30 @@ public class PhoneControls : MonoBehaviour
         //Reset dash page
         StartCoroutine(ResetDashPagePauseFirst());
     }
+
     
+    //SETTINGS APP START FUNCTION
+    public void SettingsAppStart()
+    {
+        PauseGame();
+        settingsPanel.SetActive(true);
+    }
+    
+    
+
+    //PAUSE GAME FUNCTION
+    private void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    
+    //UNPAUSE GAME FUNCTION
+    public void UnpauseGame()
+    {
+        settingsPanel.SetActive(false);
+        Time.timeScale = 1f;
+    }
     
     
 }
