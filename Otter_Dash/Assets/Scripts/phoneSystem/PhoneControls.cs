@@ -10,11 +10,11 @@ using Random = UnityEngine.Random;
 public class PhoneControls : MonoBehaviour
 {
 
+    
 
-    //Sliding phone up and down
-    [Header("Phone being used")] 
-    public bool phoneUp;
-
+    
+    
+    
     //Settings Screen
     [Header("Settings App")] 
     public GameObject settingsPanel;
@@ -27,6 +27,7 @@ public class PhoneControls : MonoBehaviour
     [Header("Different phone pages")]
     public GameObject dashPageMiddle;
     public GameObject homePageMiddle;
+    public GameObject musicPageMiddle;
     
     
     [Header("Otter Express App parts")]
@@ -41,6 +42,8 @@ public class PhoneControls : MonoBehaviour
     public GameObject acceptDeclineButtons;
     
     
+    
+    
     //Phone animations
     private Animator phoneAnimator;
 
@@ -52,7 +55,8 @@ public class PhoneControls : MonoBehaviour
     public enum PhoneState
     {
         homePage,
-        dashPage
+        dashPage,
+        musicpage
     }
 
     //Current State of the phone(for pages)
@@ -83,11 +87,15 @@ public class PhoneControls : MonoBehaviour
             OrderDelivered();
         }
 
+        
+        
+        //Phone going up animation
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             phoneAnimator.Play("PhoneUp");
         }
 
+        //Phone going down animation
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             phoneAnimator.Play("PhoneDown");
@@ -106,6 +114,9 @@ public class PhoneControls : MonoBehaviour
         //remove dash page
         dashPageMiddle.SetActive(false);
         
+        //remove music page
+        musicPageMiddle.SetActive(false);
+        
         //add home page
         homePageMiddle.SetActive(true);
 
@@ -122,6 +133,12 @@ public class PhoneControls : MonoBehaviour
         if (currentPhoneState == PhoneState.dashPage)
         {
             dashPageMiddle.SetActive(false);
+            homePageMiddle.SetActive(true);
+            titleText.text = "Home";
+            currentPhoneState = PhoneState.homePage;
+        }else if (currentPhoneState == PhoneState.musicpage)
+        {
+            musicPageMiddle.SetActive(false);
             homePageMiddle.SetActive(true);
             titleText.text = "Home";
             currentPhoneState = PhoneState.homePage;
@@ -239,6 +256,31 @@ public class PhoneControls : MonoBehaviour
         StartCoroutine(ResetDashPagePauseFirst());
     }
 
+    
+    
+    
+    
+    
+    //============ MUSIC APP FUNCTIONS ================//
+    public void MusicAppStart()
+    {
+        //Current State
+        currentPhoneState = PhoneState.musicpage;
+        
+        titleText.text = "Otter Music";
+        
+        homePageMiddle.SetActive(false);
+        musicPageMiddle.SetActive(true);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    //=============== SETTINGS FUNCTIONS================ //
     
     //SETTINGS APP START FUNCTION
     public void SettingsAppStart()

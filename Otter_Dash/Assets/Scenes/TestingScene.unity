@@ -511,41 +511,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050772581}
   m_CullTransparentMesh: 1
---- !u!1 &1086938589 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3586643640180218045, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-  m_PrefabInstance: {fileID: 3586643639652215826}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1086938590 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3586643640180218019, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
   m_PrefabInstance: {fileID: 3586643639652215826}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086938589}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab11a39f736e3bf49a0be6ff86152f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1086938591
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086938589}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 93197a0ba0073104a95e49868ac9912a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1123700253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +987,7 @@ GameObject:
   - component: {fileID: 2002506220}
   - component: {fileID: 2002506224}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: TimePauseTestItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1205,54 +1181,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 147298088}
     m_Modifications:
-    - target: {fileID: 855528004, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 855528004, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 855528004, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 855528004, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 855528004, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 855528004, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3586643640101355376, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3586643640101355376, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3586643640101355376, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3586643640101355376, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3586643640101355376, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3586643640101355376, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3586643640180218018, guid: 3bd98fdb92c82ee4ea8d5d0ee3cb42b5, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -1356,7 +1284,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4250728603847214849, guid: 24dff8880288e23468adfbfe32403037, type: 3}
       propertyPath: m_Name
-      value: playerTest
+      value: playerTest(Player object must have order system)
       objectReference: {fileID: 0}
     - target: {fileID: 4250728603847214853, guid: 24dff8880288e23468adfbfe32403037, type: 3}
       propertyPath: m_RootOrder
