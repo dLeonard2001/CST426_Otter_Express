@@ -40,10 +40,19 @@ public class PhoneControls : MonoBehaviour
 
     [Header("Accept/Decline Buttons")] 
     public GameObject acceptDeclineButtons;
-    
-    
-    
-    
+
+
+
+    [Header("Music list")] 
+    public List<AudioClip> mySongs = new List<AudioClip>();
+
+    private bool firstTimeUsingMusicApp = true;
+
+    private AudioSource myAudioSource;
+    private int currentSong  = 0;
+
+
+
     //Phone animations
     private Animator phoneAnimator;
 
@@ -72,6 +81,8 @@ public class PhoneControls : MonoBehaviour
     {
         currentPhoneState = PhoneState.homePage;
         phoneAnimator = GetComponent<Animator>();
+
+        myAudioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -262,6 +273,8 @@ public class PhoneControls : MonoBehaviour
     
     
     //============ MUSIC APP FUNCTIONS ================//
+    
+    //MUSIC APP START FUNCTION
     public void MusicAppStart()
     {
         //Current State
@@ -271,6 +284,38 @@ public class PhoneControls : MonoBehaviour
         
         homePageMiddle.SetActive(false);
         musicPageMiddle.SetActive(true);
+    }
+    
+    
+    //TODO: FIX MUSIC APP TO WORK PROPERLY.
+    
+    //MUSIC PLAY FUNCTION
+    public void PlaySong()
+    {
+        if (firstTimeUsingMusicApp)
+        {
+            myAudioSource.clip = mySongs[currentSong];
+            firstTimeUsingMusicApp = false;
+        }
+        
+
+        myAudioSource.Play();
+    }
+    
+    //NEXT SONG FUNCTION
+    public void NextSong()
+    {
+        myAudioSource.Stop();
+        myAudioSource.clip = mySongs[currentSong++];
+        myAudioSource.Play();
+    }
+    
+    //PREVIOUS SONG FUNCTION
+    public void LastSong()
+    {
+        myAudioSource.Stop();
+        myAudioSource.clip = mySongs[currentSong--];
+        myAudioSource.Play();
     }
     
     
@@ -295,6 +340,7 @@ public class PhoneControls : MonoBehaviour
     private void PauseGame()
     {
         Time.timeScale = 0f;
+        AudioListener.pause = true;
     }
 
     
@@ -303,6 +349,7 @@ public class PhoneControls : MonoBehaviour
     {
         settingsPanel.SetActive(false);
         Time.timeScale = 1f;
+        AudioListener.pause = false;
     }
     
     
