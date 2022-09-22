@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class sceneSwitch : MonoBehaviour
 {
+    public GameObject mainPanel;
+    public GameObject controlsPanel;
+    public bool controlsOn;
     private int i;
     private Stack<int> scenes = new Stack<int>();
 
@@ -35,18 +38,39 @@ public class sceneSwitch : MonoBehaviour
     public void start_btn()
     {
         i++;
-        LoadScene("Movement_test");
+        LoadScene("main_game");
     }
 
     public void controls_btn()
     {
-        i++;
-        LoadScene("controls");
+        controlsOn = true;
+        DisplayControls();
+    }
+
+    public void back_btn()
+    {
+        controlsOn = false;
+        DisplayControls();
     }
 
     public void quit_btn()
     {
         Application.Quit();
+    }
+
+    public void DisplayControls()
+    {
+        if (controlsOn)
+        {
+            mainPanel.SetActive(false);
+            controlsPanel.SetActive(true);
+            
+        }
+        else
+        {
+            mainPanel.SetActive(true);
+            controlsPanel.SetActive(false);
+        }
     }
 
 

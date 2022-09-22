@@ -39,7 +39,7 @@ public class OrderSystem : MonoBehaviour
         {
             activeOrder = myOrders[Random.Range(0, myOrders.Count)];
             Debug.Log("new order taken");
-            pickUpLocation = Instantiate(activeOrder.pickUpLocation, activeOrder.myPickUpLocation, Quaternion.identity);
+            pickUpLocation = Instantiate(activeOrder.pickUpLocation, activeOrder.pickUpLocation.transform.position, Quaternion.identity);
             orderDelivered = false;
         }
     }
@@ -81,7 +81,7 @@ public class OrderSystem : MonoBehaviour
             Debug.Log("Order has been picked up!");
 
             //spawn the delivery location after picking up food.
-            deliveryLocation = Instantiate(activeOrder.deliveryLocation, activeOrder.myDeliveryLocation, Quaternion.identity);
+            deliveryLocation = Instantiate(activeOrder.deliveryLocation, activeOrder.deliveryLocation.transform.position, Quaternion.identity);
             
             //Delete the pick up location after spawning delivery location.
             Destroy(pickUpLocation,0.0f);
