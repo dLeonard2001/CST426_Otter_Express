@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 public class PhoneControls : MonoBehaviour
@@ -43,21 +44,20 @@ public class PhoneControls : MonoBehaviour
 
 
 
-    [Header("Music list")] 
+    [Header("Music list")]
     public List<AudioClip> mySongs = new List<AudioClip>();
 
     private bool firstTimeUsingMusicApp = true;
 
     private AudioSource myAudioSource;
-    private int currentSong  = 0;
-
+    [Header("Testing current song location")]
+    public int currentSong  = 0;
+    private bool songIsPaused = true;
 
 
     //Phone animations
     private Animator phoneAnimator;
-
-
-
+    
 
 
     //Phone states (Not sure if actually needed(mostly not)
@@ -292,21 +292,43 @@ public class PhoneControls : MonoBehaviour
     //MUSIC PLAY FUNCTION
     public void PlaySong()
     {
-        if (firstTimeUsingMusicApp)
+        if (firstTimeUsingMusicApp && songIsPaused)
         {
             myAudioSource.clip = mySongs[currentSong];
             firstTimeUsingMusicApp = false;
         }
-        
 
-        myAudioSource.Play();
+        if (songIsPaused)
+        {
+            myAudioSource.Play();
+            //todo: change play button picture to pause picture
+
+            songIsPaused = false;
+
+        }else if (!songIsPaused)
+        {
+            myAudioSource.Pause();
+            // todo: change pause picture to play picture
+
+            songIsPaused = true;
+        }
+
     }
     
     //NEXT SONG FUNCTION
     public void NextSong()
     {
         myAudioSource.Stop();
-        myAudioSource.clip = mySongs[currentSong++];
+        if (currentSong + 1 > 1)
+        {
+            currentSong = 0;
+        }
+        else
+        {
+            currentSong =+ 1;
+        }
+        
+        myAudioSource.clip = mySongs[currentSong];
         myAudioSource.Play();
     }
     
@@ -314,7 +336,15 @@ public class PhoneControls : MonoBehaviour
     public void LastSong()
     {
         myAudioSource.Stop();
-        myAudioSource.clip = mySongs[currentSong--];
+        if (currentSong - 1 < 0)
+        {
+            currentSong = 1;
+        }
+        else
+        {
+           currentSong =- 1;
+        }
+        myAudioSource.clip = mySongs[currentSong];
         myAudioSource.Play();
     }
     
