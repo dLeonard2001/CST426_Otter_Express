@@ -77,9 +77,6 @@ namespace Command
                 moveBackward.Execute(boxTrans, moveBackward, speedMultiplier);
                 playerMoving = true;
             }
-            
-            if (!inputManager.Forward() && !inputManager.Backward())
-                playerMoving = false;
 
             if (inputManager.Left())
             {

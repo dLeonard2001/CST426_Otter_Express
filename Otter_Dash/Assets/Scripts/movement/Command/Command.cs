@@ -11,8 +11,7 @@ namespace Command
         //How far should the box move when we press a button
         protected static float forward = 2f;
         protected static float backward = forward;
-        protected static float turn = 0;
-        protected static float maxVelocity = 10f;
+        protected static float maxVelocity = 30f;
         protected static Vector3 flatVelocity;
 
 
@@ -79,17 +78,9 @@ namespace Command
         
         public void IncreaseRotation(Rigidbody boxRB)
         {
-            Debug.Log(boxRB.angularVelocity);
-            if (boxRB.angularVelocity.magnitude < 5)
-            {
-                boxRB.AddTorque(boxRB.transform.up * 8 * -1);
-            }
-            else
-            {
-                flatVelocity = new Vector3(0f, boxRB.angularVelocity.y, 0f);
-                Vector3 limitedVelocity = flatVelocity.normalized * 5;
-                boxRB.angularVelocity = new Vector3(0f, limitedVelocity.y, 0f);
-            }
+            
+            Debug.Log(boxRB.transform.up * 20 * -1);
+            boxRB.AddTorque(boxRB.transform.up * 50 * -1);
         }
     }
 
@@ -104,16 +95,8 @@ namespace Command
         
         public void IncreaseRotation(Rigidbody boxRB)
         {
-            if (boxRB.angularVelocity.magnitude < 5)
-            {
-                boxRB.AddTorque(boxRB.transform.up * 8);
-            }
-            else
-            {
-                flatVelocity = new Vector3(0f, boxRB.angularVelocity.y, 0f);
-                Vector3 limitedVelocity = flatVelocity.normalized * 5;
-                boxRB.angularVelocity = new Vector3(0f, limitedVelocity.y, 0f);
-            }
+            Debug.Log(boxRB.transform.up * 20);
+            boxRB.AddTorque(boxRB.transform.up * 50);
         }
     }
 
