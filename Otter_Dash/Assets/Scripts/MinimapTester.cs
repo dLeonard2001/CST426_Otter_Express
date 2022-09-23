@@ -16,6 +16,6 @@ public class MinimapTester : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        minimap.transform.position = new Vector3(player.transform.position.x, 10, player.transform.position.z);
+        minimap.transform.position = new Vector3(player.transform.position.x, 100, player.transform.position.z);
     }
 }
