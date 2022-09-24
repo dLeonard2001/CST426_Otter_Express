@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2328586914332591451}
   - component: {fileID: 2328586914332591450}
   - component: {fileID: 2328586915654509560}
+  - component: {fileID: 387980530}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2328586914332591448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 6.19, z: 0.58}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 1, z: 1}
   m_Children:
   - {fileID: 2328586915447362997}
   - {fileID: 2328586914767771528}
@@ -49,7 +50,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 2
 --- !u!114 &2328586914332591450
 MonoBehaviour:
@@ -65,8 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputManager: {fileID: 0}
   boxTrans: {fileID: 2328586914332591451}
-  playerPhone: {fileID: 0}
-  speedMultiplier: 1
+  speedMultiplier: 30
   mainCamera: {fileID: 0}
   camController: {fileID: 2328586914767771529}
 --- !u!114 &2328586915654509560
@@ -87,6 +87,31 @@ MonoBehaviour:
   activeOrder: {fileID: 0}
   orderPickedUp: 0
   orderDelivered: 0
+  myDeliveryGreenSpacePrefab: {fileID: 4777738945244286197, guid: 6a9c3e4cec3c0074593db80c327d0138, type: 3}
+  myPickUpGreenSpacePrefab: {fileID: 3455510539436987318, guid: cc89638d77c96e7458df6043fb9b9a8c, type: 3}
+  allMyDropOffLocations: {fileID: 0}
+  allMyPickUpLocations: {fileID: 0}
+  myDeliveryLocations: []
+  myPickupLocations: []
+  currentPickUpLocation: {x: 0, y: 0, z: 0}
+  currentDropOffLocation: {x: 0, y: 0, z: 0}
+--- !u!114 &387980530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2328586914332591448}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ec9c7869e879745944e9674e9ed2c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRoadSystem: {fileID: 0}
+  Goal: {x: 0, y: 0, z: 0}
+  GraphStepSize: 1
+  MinDistanceYScale: 1
+  MinDistanceToRoadToConnect: 10
 --- !u!1 &2328586914767771534
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2328586914767771534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12, y: 2.1299996, z: -9.14}
+  m_LocalPosition: {x: -0.4799767, y: 2.1299999, z: -10.140016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2328586915262447172}
@@ -231,12 +256,12 @@ MonoBehaviour:
   ShoulderOffset: {x: -0.12, y: 1.13, z: -2.14}
   VerticalArmLength: 1
   CameraSide: 1
-  CameraDistance: 7
+  CameraDistance: 8
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 0
   IgnoreTag: 
-  CameraRadius: 0.2
+  CameraRadius: 0.189
 --- !u!1 &2328586915447363001
 GameObject:
   m_ObjectHideFlags: 0
