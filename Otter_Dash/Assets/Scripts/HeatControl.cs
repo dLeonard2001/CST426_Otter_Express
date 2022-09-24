@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
@@ -13,7 +14,10 @@ public class HeatControl : MonoBehaviour
     //private float foodHotness = 100; //every food starts with a 100 heat
     private const float HEAT_DROP_RATE = 0.02f;
     public Image parentImageComponent;
+    private static float lastDeliveryHeatAmmount;
     float elapsedTime;
+
+    [SerializeField] UnityEvent OnFoodTooCold;
     
 
     [SerializeField] private Color red;
@@ -22,9 +26,16 @@ public class HeatControl : MonoBehaviour
 
 
 
-    private Image heatCirlceImg;
+    private static Image heatCirlceImg;
+
+    public enum FoodState {BAD, HOT, WARM, COLD }
     // Start is called before the first frame update
-    
+    public static FoodState foodState;
+
+    private void Awake()
+    {
+        foodState = FoodState.HOT;
+    }
 
     void Start()
     {
@@ -35,30 +46,40 @@ public class HeatControl : MonoBehaviour
         heatCirlceImg = GetComponent<Image>();
         heatCirlceImg.enabled = true;
         
+        
         red = heatCirlceImg.color; //save the initial red color.
     }
 
     // Update is called once per frame
     void Update()
     {
-        elapsedTime += Time.deltaTime;
-        if (elapsedTime >= keepWarmStrength)
+        if (foodState != FoodState.BAD)
         {
-            elapsedTime = 0;
-            reduceFoodHeat();
-        }
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime >= keepWarmStrength)
+            {
+                elapsedTime = 0;
+                reduceFoodHeat();
+            }
 
-        if (heatCirlceImg.fillAmount > 0.67f)
-        {
-            turnCirlcleColorRed();
-        } 
-        else if (heatCirlceImg.fillAmount <= 0.67f && heatCirlceImg.fillAmount > 0.34f)
-        { 
-            turnCirlcleColorYellow();
-        }
-        else if(heatCirlceImg.fillAmount <= 0.34f)
-        {
-            turnCirlcleColorBlue();
+            if (heatCirlceImg.fillAmount > 0.67f)
+            {
+                foodState = FoodState.HOT;
+                turnCirlcleColorRed();
+            }
+            else if (heatCirlceImg.fillAmount <= 0.67f
+                     && heatCirlceImg.fillAmount > 0.34f )
+            {
+                turnCirlcleColorYellow();
+                foodState = FoodState.WARM;
+
+            }
+            else if (heatCirlceImg.fillAmount <= 0.34f )
+            {
+                turnCirlcleColorBlue();
+                foodState = FoodState.COLD;
+
+            }
         }
     }
 
@@ -75,28 +96,40 @@ public class HeatControl : MonoBehaviour
     {
         heatCirlceImg.color = Color.Lerp(heatCirlceImg.color, red,0.02f);
     }
+
     
-    void resetCircle()
+    public void resetHeatCircle() // on order delivered this is called
     {
+        lastDeliveryHeatAmmount = heatCirlceImg.fillAmount; // store last delivery heat amount
         heatCirlceImg.color = red;
         heatCirlceImg.fillAmount = 1;
-
     }
+
+    public static float getLastDeliveryHeatAmount()
+    {
+        return lastDeliveryHeatAmmount;
+    }
+   
 
     void reduceFoodHeat()
     {
-        if (heatCirlceImg.fillAmount != 0)
+        if (heatCirlceImg.fillAmount > 0)
         {
             heatCirlceImg.fillAmount -=HEAT_DROP_RATE;
         }
+        else
+        {
+            OnFoodTooCold.Invoke();
+            foodState = FoodState.BAD;
+            Debug.Log("Food is cold");
+        }
     }
 
-    public void addMoreHeatToFood(float heatAmmount)
+    public static void addMoreHeatToFood(float heatAmmount)
     {
         if (heatCirlceImg.fillAmount > 0)
         {
             heatCirlceImg.fillAmount +=heatAmmount;
-            
         }
     }
 }

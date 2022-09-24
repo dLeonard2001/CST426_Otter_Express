@@ -9,9 +9,6 @@ public class ShellScript : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     private SpriteRenderer _spriteRenderer;
-    private ShellCounter shellCounter;
-    private HeatControl heatControl;
-
 
     private enum State
     {
@@ -27,8 +24,6 @@ public class ShellScript : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        heatControl = FindObjectOfType<HeatControl>();
-        shellCounter = FindObjectOfType<ShellCounter>();
         state = State.Active;
     }
 
@@ -51,10 +46,10 @@ public class ShellScript : MonoBehaviour
 
             if (type == "coin")
             {
-                shellCounter.updateCoinCount(worth);
+                ShellCounter.updateCoinCount(worth);
             }else if (type == "heat")
             {
-                heatControl.addMoreHeatToFood(worth);
+                HeatControl.addMoreHeatToFood(worth);
             }
 
         }

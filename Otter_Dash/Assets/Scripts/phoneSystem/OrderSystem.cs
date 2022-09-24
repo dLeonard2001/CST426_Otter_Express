@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -23,6 +24,11 @@ public class OrderSystem : MonoBehaviour
     private GameObject deliveryLocation;
     private GameObject pickUpLocation;
 
+    [SerializeField] UnityEvent OnPickUpOrder;
+    [SerializeField] private UnityEvent OnAddOrder;
+    [SerializeField] private UnityEvent OnDropOffOrder;
+    
+
 
 
 
@@ -30,6 +36,7 @@ public class OrderSystem : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
     }
     
 
@@ -41,6 +48,8 @@ public class OrderSystem : MonoBehaviour
             Debug.Log("new order taken");
             pickUpLocation = Instantiate(activeOrder.pickUpLocation, activeOrder.myPickUpLocation, Quaternion.identity);
             orderDelivered = false;
+            OnAddOrder.Invoke();
+            
         }
     }
 
@@ -86,9 +95,10 @@ public class OrderSystem : MonoBehaviour
             //Delete the pick up location after spawning delivery location.
             Destroy(pickUpLocation,0.0f);
 
+            OnPickUpOrder.Invoke();// fire the event
         }
 
-        
+
         //player drops off food
         if (other.CompareTag("DropOffLocation") && orderPickedUp)
         {
@@ -100,8 +110,17 @@ public class OrderSystem : MonoBehaviour
 
             
             //Delete the delivery location marker
-            Destroy(deliveryLocation, 0.0f);
+            destroyDeliveryLocation();
+            OnDropOffOrder.Invoke();
         }
+
+    }
+
+    public void destroyDeliveryLocation()
+    {
+        activeOrder = null;
+        orderPickedUp = false;
+        Destroy(deliveryLocation, 0.0f);
 
     }
 
