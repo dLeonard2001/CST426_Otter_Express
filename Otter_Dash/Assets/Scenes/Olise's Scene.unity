@@ -298,6 +298,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131330360}
   m_CullTransparentMesh: 1
+--- !u!1001 &223107194
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1818295158}
+    m_Modifications:
+    - target: {fileID: 5291944631164185812, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+      propertyPath: m_Name
+      value: Olise DropOff
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925753066901010514, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925753066901010514, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925753066901010514, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925753066901010514, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.7282914
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925753066901010514, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925753066901010514, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925753066901010514, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925753066901010514, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925753066901010514, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925753066901010514, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6925753066901010514, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
 --- !u!1 &281741961
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +797,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &777423184 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6925753066901010514, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+  m_PrefabInstance: {fileID: 223107194}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &854920984
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1097187911}
+    m_Modifications:
+    - target: {fileID: 225970415465073064, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+      propertyPath: m_Name
+      value: Olise PickUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177471008592318793, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177471008592318793, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177471008592318793, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177471008592318793, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177471008592318793, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177471008592318793, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177471008592318793, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177471008592318793, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177471008592318793, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177471008592318793, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177471008592318793, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
 --- !u!1 &899237852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,6 +1278,14 @@ MonoBehaviour:
   activeOrder: {fileID: 0}
   orderPickedUp: 0
   orderDelivered: 0
+  myDeliveryGreenSpacePrefab: {fileID: 5291944631164185812, guid: 22252d31b4f6336479abdb8727e31219, type: 3}
+  myPickUpGreenSpacePrefab: {fileID: 225970415465073064, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+  allMyDropOffLocations: {fileID: 1818295157}
+  allMyPickUpLocations: {fileID: 1097187910}
+  myDeliveryLocations: []
+  myPickupLocations: []
+  currentPickUpLocation: {x: 0, y: 0, z: 0}
+  currentDropOffLocation: {x: 0, y: 0, z: 0}
   OnPickUpOrder:
     m_PersistentCalls:
       m_Calls:
@@ -1364,6 +1491,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079883905}
   m_CullTransparentMesh: 1
+--- !u!1 &1097187910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1097187911}
+  m_Layer: 0
+  m_Name: pickups
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1097187911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097187910}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.42, y: 2.07, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1643171064}
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174910880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,6 +1861,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 85.534}
+--- !u!4 &1643171064 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4177471008592318793, guid: 7dad8ca8f93af434ca71babaf93d834d, type: 3}
+  m_PrefabInstance: {fileID: 854920984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1818295157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1818295158}
+  m_Layer: 0
+  m_Name: DropOffs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1818295158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818295157}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 777423184}
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1831577448
 PrefabInstance:
   m_ObjectHideFlags: 0
