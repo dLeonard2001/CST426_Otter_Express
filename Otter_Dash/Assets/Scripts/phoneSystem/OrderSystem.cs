@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SocialPlatforms;
 using Object = UnityEngine.Object;
@@ -44,7 +45,9 @@ public class OrderSystem : MonoBehaviour
 
     
     private GameObject greenSpaceToBeDestroyed;
-    
+    [SerializeField] UnityEvent OnPickUpOrder;
+    [SerializeField] private UnityEvent OnAddOrder;
+    [SerializeField] private UnityEvent OnDropOffOrder;
 
 
     private void Awake()
@@ -89,7 +92,7 @@ public class OrderSystem : MonoBehaviour
             
             
             orderDelivered = false;
-            
+            OnAddOrder.Invoke();
             
             
             //old code
@@ -138,7 +141,7 @@ public class OrderSystem : MonoBehaviour
             Destroy(greenSpaceToBeDestroyed, 0.0f);
             
             greenSpaceToBeDestroyed = Instantiate(myDeliveryGreenSpacePrefab, currentDropOffLocation, Quaternion.identity);
-            
+            OnPickUpOrder.Invoke();// fire the event
             
             
             //old code
@@ -162,6 +165,7 @@ public class OrderSystem : MonoBehaviour
             orderDelivered = true;
 
             Destroy(greenSpaceToBeDestroyed);
+            OnDropOffOrder.Invoke();
             
             //old code
             //Delete the delivery location marker
@@ -170,7 +174,13 @@ public class OrderSystem : MonoBehaviour
 
     }
 
+    public void destroyDeliveryLocation()
+    {
+        activeOrder = null;
+        orderPickedUp = false;
+        Destroy(greenSpaceToBeDestroyed);
 
+    }
         
         
         
