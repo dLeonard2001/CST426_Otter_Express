@@ -69,7 +69,7 @@ Debug.Log("Base reward= "+ baseReward+"\n Tips= "+ Mathf.CeilToInt(tips));
         // we assume otters should drive at least 60 km/hr everytime.
         if (useActualDistance == true)
         {
-            testDistanceInMeters = Vector3.Distance(job.myPickUpLocation, job.myDeliveryLocation); 
+            testDistanceInMeters = Vector3.Distance(orderSystem.currentPickUpLocation, orderSystem.currentDropOffLocation); 
         }
         
         
