@@ -12,10 +12,7 @@ public class Order : ScriptableObject
     public string customersOrder;
     public int foodTemperature;
     public int orderAcceptTimer;
-    public GameObject pickUpLocation;
-    public GameObject deliveryLocation;
-    public Vector3 myPickUpLocation;
-    public Vector3 myDeliveryLocation;
+    
 
 
 

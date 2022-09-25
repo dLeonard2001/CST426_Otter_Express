@@ -9,13 +9,13 @@ public class MinimapTester : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Capsule");
-        minimap = GameObject.Find("CameraMap");
+        // player = GameObject.Find("Capsule");
+        // minimap = GameObject.Find("CameraMap");
     }
 
     // Update is called once per frame
     void Update()
     {
-        minimap.transform.position = new Vector3(player.transform.position.x, 10, player.transform.position.z);
+        minimap.transform.position = new Vector3(player.transform.position.x, 100, player.transform.position.z);
     }
 }

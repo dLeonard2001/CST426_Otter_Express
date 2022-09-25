@@ -93,8 +93,6 @@ public class OrderSystem : MonoBehaviour
             
             orderDelivered = false;
             OnAddOrder.Invoke();
-
-            
             
             
             //old code
@@ -168,7 +166,6 @@ public class OrderSystem : MonoBehaviour
 
             Destroy(greenSpaceToBeDestroyed);
             OnDropOffOrder.Invoke();
-
             
             //old code
             //Delete the delivery location marker
