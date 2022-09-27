@@ -10,7 +10,8 @@ using Image = UnityEngine.UI.Image;
 public class HeatControl : MonoBehaviour
 {
     private BagScriptableObject bag; // a scriptable object.
-    private float keepWarmStrength; // how many sec that goes by before the heat meter drops by drop rate.
+    [Tooltip("how many sec that goes by before the heat meter drops by drop rate.")]
+    private float keepWarmStrength; 
     //private float foodHotness = 100; //every food starts with a 100 heat
     private const float HEAT_DROP_RATE = 0.02f;
     public Image parentImageComponent;
