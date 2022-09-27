@@ -94,7 +94,7 @@ public class DeliveryTimeController : MonoBehaviour
         
         startTimerSecPart=Mathf.CeilToInt( 60 * (deliveryTimeAllocated - startTimerMinPart)) + addMoreTime;
         
-        if (startTimerMinPart > 59)
+        if (startTimerSecPart > 59)
             startTimerSecPart = 59;
         
         timerUIText.text = customizeTimeOutput(startTimerMinPart, startTimerSecPart);

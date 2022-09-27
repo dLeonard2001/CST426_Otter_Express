@@ -751,7 +751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testDistanceMeters: 4000
-  useActualDistance: 1
+  useActualDistance: 0
 --- !u!4 &899237854
 Transform:
   m_ObjectHideFlags: 0
@@ -1031,7 +1031,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2078203355}
         m_TargetAssemblyTypeName: DeliveryTimeController, Assembly-CSharp
-        m_MethodName: startDeliveryTimer
+        m_MethodName: setStartTime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1071,18 +1071,6 @@ MonoBehaviour:
   OnDropOffOrder:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2078203355}
-        m_TargetAssemblyTypeName: DeliveryTimeController, Assembly-CSharp
-        m_MethodName: EndDeliveryTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 988325675}
         m_TargetAssemblyTypeName: testOrderCallSystem, Assembly-CSharp
         m_MethodName: acceptNewOrder
@@ -1928,6 +1916,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 81943090}
     m_Modifications:
     - target: {fileID: 7179255053394172479, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
+      propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179255053394172479, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
+      propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179255053394172479, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
+      propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179255053394172479, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
+      propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1174910884}
+    - target: {fileID: 7179255053394172479, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
       propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 988325675}
@@ -1935,6 +1939,34 @@ PrefabInstance:
       propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 988325676}
+    - target: {fileID: 7179255053394172479, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
+      propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 1079883905}
+    - target: {fileID: 7179255053394172479, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
+      propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179255053394172479, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
+      propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: resetHeatCircle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179255053394172479, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
+      propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179255053394172479, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
+      propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HeatControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179255053394172479, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
+      propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179255053394172479, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
+      propertyPath: OnTimerFinish.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7179255054118268992, guid: ea1c59ecf8b74294eb41485245ce4c52, type: 3}
       propertyPath: OnFoodTooCold.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
