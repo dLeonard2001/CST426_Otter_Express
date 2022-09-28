@@ -14,9 +14,11 @@ public class PhoneControls : MonoBehaviour
     
 
     
-    
-    
-    //Settings Screen
+    //Shop Screen
+    [Header("Shop App")]
+    public GameObject shopPanel;
+
+        //Settings Screen
     [Header("Settings App")] 
     public GameObject settingsPanel;
     
@@ -29,6 +31,7 @@ public class PhoneControls : MonoBehaviour
     public GameObject dashPageMiddle;
     public GameObject homePageMiddle;
     public GameObject musicPageMiddle;
+    public GameObject shopPageMiddle;
     
     
     [Header("Otter Express App parts")]
@@ -44,6 +47,7 @@ public class PhoneControls : MonoBehaviour
 
 
 
+    //Music Variables
     [Header("Music list")]
     public List<AudioClip> mySongs = new List<AudioClip>();
 
@@ -53,6 +57,8 @@ public class PhoneControls : MonoBehaviour
     [Header("Testing current song location")]
     public int currentSong  = 0;
     private bool songIsPaused = true;
+    
+    
 
 
     //Phone animations
@@ -127,7 +133,7 @@ public class PhoneControls : MonoBehaviour
         
         //remove music page
         musicPageMiddle.SetActive(false);
-        
+
         //add home page
         homePageMiddle.SetActive(true);
 
@@ -352,6 +358,16 @@ public class PhoneControls : MonoBehaviour
     
     
     
+    //============== SHOP FUNCITONS ================= //
+
+    public void ShopAppStart()
+    {
+        PauseGame();
+        shopPanel.SetActive(true);
+        
+    }
+    
+    
     
     
     
@@ -378,6 +394,7 @@ public class PhoneControls : MonoBehaviour
     public void UnpauseGame()
     {
         settingsPanel.SetActive(false);
+        shopPanel.SetActive(false);
         Time.timeScale = 1f;
         AudioListener.pause = false;
     }
