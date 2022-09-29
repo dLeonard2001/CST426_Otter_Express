@@ -7,9 +7,11 @@ public class DeliverySystem : MonoBehaviour
     private OrderSystem orderSystem; // for handeling orders
 
     private Order job; // the active order
-    private int time; //time in min
+   private float rawTime;
     private float heatPercentage; // heat percentage of lastest deliverd food
+    [Tooltip("used for test")]
     public float testDistanceMeters;
+    [Tooltip("set true to use actual distance between pick up and drop off location.")]
     public bool useActualDistance;
     
     // Start is called before the first frame update
@@ -28,7 +30,8 @@ public class DeliverySystem : MonoBehaviour
     {
         job = orderSystem.activeOrder;
         calculateTime(testDistanceMeters);
-        DeliveryTimeController.deliveryTimeAllocated = time; // set time behind the scene
+        DeliveryTimeController.deliveryTimeAllocated = rawTime; // set time behind the scene
+       // DeliveryTimeController.setStartTime();
     }
 
     public void endCurrentJob()
@@ -75,9 +78,11 @@ Debug.Log("Base reward= "+ baseReward+"\n Tips= "+ Mathf.CeilToInt(tips));
         
         Debug.Log("Distance between pickUp location and drop off location is "+ testDistanceInMeters+ "meters");
 
-        time = Mathf.CeilToInt(testDistanceInMeters / 1002); //each mile is 1002
+        rawTime = testDistanceInMeters / 1002;
 
-        Debug.Log("Time alocated for delivery = " + time+ " mins");
+        //timeInMinutes = Mathf.CeilToInt(testDistanceInMeters / 1002); //each mile is 1002
+
+        Debug.Log("Time alocated for delivery = " + rawTime+ " mins");
 
 
     }

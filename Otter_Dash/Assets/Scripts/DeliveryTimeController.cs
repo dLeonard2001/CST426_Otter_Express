@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,10 +12,13 @@ public class DeliveryTimeController : MonoBehaviour
     float elapsedTime;
     float timeLimit = 1f;
     
-    public static int deliveryTimeAllocated; //time(mins) for current delivery 
+    public static float deliveryTimeAllocated; //rawTime for current delivery 
     public static string timeSpent;
+    private static int startTimerMinPart; //used to accurately set the minute at start of delivery
+    private static int startTimerSecPart; //used to accurately set the sec at start of delivery
     static  TextMeshProUGUI timerUIText = null;
     [SerializeField] public UnityEvent OnTimerFinish;
+    private static int addMoreSec = 30 ; // because we are not calculating distance properly
     
     private enum state
     {
@@ -28,13 +32,14 @@ public class DeliveryTimeController : MonoBehaviour
     private void Awake()
     { 
         timerUIText = GetComponent<TextMeshProUGUI>();
-        
-        
+        //setStartTime();
+
     }
 
     void Start()
     {
         timerUIText = GetComponent<TextMeshProUGUI>();
+        Debug.Log("awake");
     }
 
     // Update is called once per frame
@@ -52,26 +57,8 @@ public class DeliveryTimeController : MonoBehaviour
         }
     }
 
-    public static void startDeliveryTimer() // called when a player picksUp an order
-    {
-    timerUIText.text = deliveryTimeAllocated + ":00";
-    timeState = state.RUNNING;
-    }
-    public static void EndDeliveryTimer() // called when a player picksUp an order
-    {
-        timeState = state.IS_PAUSED; //pause the timer
-        timeSpent = timerUIText.text;
-    }
 
-    public static int getMinSpent()
-    {
-        return int.Parse(timeSpent.Split(':')[0]);
-    }
-    
-    public static int getSecSpent() //get seconds spent in the last delivery
-    {
-        return int.Parse(timeSpent.Split(':')[1]);
-    }
+
 
     private void updateUITimer()
     {
@@ -98,21 +85,46 @@ public class DeliveryTimeController : MonoBehaviour
             }
         }
 
+        timerUIText.text = customizeTimeOutput(minPart, secPart);
+    }
+
+    public static void setStartTime()
+    {
+        startTimerMinPart = Mathf.FloorToInt(deliveryTimeAllocated);
+        
+        startTimerSecPart=Mathf.CeilToInt( 60 * (deliveryTimeAllocated - startTimerMinPart)) + addMoreSec;
+        
+        if (startTimerSecPart > 59)
+            startTimerSecPart = 59;
+        
+        timerUIText.text = customizeTimeOutput(startTimerMinPart, startTimerSecPart);
+        timeState = state.RUNNING;
+    }
+
+    private static string customizeTimeOutput(int minPart, int secPart)
+    {
+        string output = "";
+        
         if (secPart < 10 && secPart > 0)
         {
-            timerUIText.text = minPart + ":" + "0" + secPart;
+            output = minPart + ":" + "0" + secPart;
         }
         else
         {
             if (secPart == 0)
             {
-                timerUIText.text = minPart + ":" + secPart + "0" ;
+                output = minPart + ":" + secPart + "0" ;
             }
             else
             {
-                timerUIText.text = minPart + ":" + secPart;
+                output = minPart + ":" + secPart;
             }
         }
-        
+
+        return output;
     }
+
+    
+
+    
 }

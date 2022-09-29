@@ -6,5 +6,6 @@ using UnityEngine.UI;
 public class BagScriptableObject : ScriptableObject
 {
     public Sprite bagPicture;
+    [Tooltip("how many sec that goes by before the heat meter drops by drop rate.")]
     public float keepWarmStrength;
 }
