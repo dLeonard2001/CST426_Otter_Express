@@ -18,7 +18,7 @@ public class DeliveryTimeController : MonoBehaviour
     private static int startTimerSecPart; //used to accurately set the sec at start of delivery
     static  TextMeshProUGUI timerUIText = null;
     [SerializeField] public UnityEvent OnTimerFinish;
-    private static int addMoreTime = 10 ; // because we are not calculating distance properly
+    private static int addMoreSec = 25 ; // because we are not calculating distance properly
     
     private enum state
     {
@@ -92,7 +92,7 @@ public class DeliveryTimeController : MonoBehaviour
     {
         startTimerMinPart = Mathf.FloorToInt(deliveryTimeAllocated);
         
-        startTimerSecPart=Mathf.CeilToInt( 60 * (deliveryTimeAllocated - startTimerMinPart)) + addMoreTime;
+        startTimerSecPart=Mathf.CeilToInt( 60 * (deliveryTimeAllocated - startTimerMinPart)) + addMoreSec;
         
         if (startTimerSecPart > 59)
             startTimerSecPart = 59;

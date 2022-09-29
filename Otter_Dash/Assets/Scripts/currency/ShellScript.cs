@@ -20,6 +20,12 @@ public class ShellScript : MonoBehaviour
     public string type;
     [SerializeField] [Range(0,100)] private float worth;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+
+    }
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
