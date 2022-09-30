@@ -9,6 +9,12 @@ public class sceneSwitch : MonoBehaviour
     public GameObject mainPanel;
     public GameObject controlsPanel;
     public bool controlsOn;
+
+    [Header("Animations")] 
+    public Animator transition;
+    public float transitionTime;
+    
+    
     private int i;
     private Stack<int> scenes = new Stack<int>();
 
@@ -17,13 +23,12 @@ public class sceneSwitch : MonoBehaviour
         i = 0;
     }
 
-    public void LoadScene(string sceneName)
+    public void LoadScene(int i)
     {
         var scene = SceneManager.GetActiveScene();
         var activeScene = scene.buildIndex;
         scenes.Push(activeScene);
-        // SceneManager.UnloadSceneAsync(scene);
-        SceneManager.LoadSceneAsync(sceneName);
+        StartCoroutine(LoadLevel(i));
     }
 
     public void PreviousScene()
@@ -38,7 +43,7 @@ public class sceneSwitch : MonoBehaviour
     public void start_btn()
     {
         i++;
-        LoadScene("main_game");
+        LoadScene(i);
     }
 
     public void controls_btn()
@@ -56,6 +61,16 @@ public class sceneSwitch : MonoBehaviour
     public void quit_btn()
     {
         Application.Quit();
+    }
+
+    IEnumerator LoadLevel(int levelIndex)
+    {
+        transition.SetTrigger("start");
+
+        yield return new WaitForSeconds(1);
+        
+        SceneManager.LoadSceneAsync(levelIndex);
+        
     }
 
     public void DisplayControls()
