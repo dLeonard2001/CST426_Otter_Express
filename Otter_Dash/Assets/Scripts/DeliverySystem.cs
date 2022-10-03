@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Barmetler.RoadSystem;
 using UnityEngine;
 
 public class DeliverySystem : MonoBehaviour
@@ -7,8 +8,9 @@ public class DeliverySystem : MonoBehaviour
     private OrderSystem orderSystem; // for handeling orders
 
     private Order job; // the active order
-   private float rawTime;
+    private float rawTime;
     private float heatPercentage; // heat percentage of lastest deliverd food
+    [SerializeField]public RoadSystemNavigator roadSystemNavigator;
     [Tooltip("used for test")]
     public float testDistanceMeters;
     [Tooltip("set true to use actual distance between pick up and drop off location.")]
@@ -31,12 +33,23 @@ public class DeliverySystem : MonoBehaviour
         job = orderSystem.activeOrder;
         calculateTime(testDistanceMeters);
         DeliveryTimeController.deliveryTimeAllocated = rawTime; // set time behind the scene
-       // DeliveryTimeController.setStartTime();
+        roadSystemNavigator.Goal = orderSystem.currentPickUpLocation; //set navigation
+        // DeliveryTimeController.setStartTime();
     }
 
     public void endCurrentJob()
     {
         job = null;
+        
+    }
+
+    public void setNavToDropOffLocation()
+    {
+        roadSystemNavigator.Goal = orderSystem.currentDropOffLocation;
+    }
+    public void setNavToPickUpLocation()
+    {
+        roadSystemNavigator.Goal = orderSystem.currentPickUpLocation;
     }
 
     public void jobFinished()
