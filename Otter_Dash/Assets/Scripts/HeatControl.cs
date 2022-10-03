@@ -16,6 +16,7 @@ public class HeatControl : MonoBehaviour
     private const float HEAT_DROP_RATE = 0.02f;
     public Image parentImageComponent;
     private static float lastDeliveryHeatAmmount;
+    private string bagName = "WhackAssBag";
     float elapsedTime;
 
     [SerializeField] UnityEvent OnFoodTooCold;
@@ -36,13 +37,13 @@ public class HeatControl : MonoBehaviour
     private void Awake()
     {
         foodState = FoodState.HOT;
+        Debug.Log("heyyyy");
+
     }
 
     void Start()
     {
-        bag = Resources.Load<BagScriptableObject>("ScriptableOBJ/WhackAssBag");
-        keepWarmStrength = bag.keepWarmStrength;
-        parentImageComponent.sprite= bag.bagPicture; // adds bag picture
+        changeBag(bagName);
         parentImageComponent.enabled = true;
         heatCirlceImg = GetComponent<Image>();
         heatCirlceImg.enabled = true;
@@ -50,6 +51,14 @@ public class HeatControl : MonoBehaviour
         
         red = heatCirlceImg.color; //save the initial red color.
     }
+
+    public void changeBag(string bagName)
+    {
+        bag = Resources.Load<BagScriptableObject>("ScriptableOBJ/"+ bagName);
+        keepWarmStrength = bag.keepWarmStrength;
+        parentImageComponent.sprite= bag.bagPicture; // adds bag picture
+    } 
+    
 
     // Update is called once per frame
     void Update()
