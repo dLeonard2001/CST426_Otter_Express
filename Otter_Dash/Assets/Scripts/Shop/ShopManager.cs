@@ -12,6 +12,10 @@ public class ShopManager : MonoBehaviour
     //Test money.
     public int testCurrency = 1000;
     public int testSpecialCurrency = 2;
+    
+    
+    public TextMeshProUGUI testCurrencyText;
+    public TextMeshProUGUI testSpecialCurrencyText;
 
     //Reference to heatControl, so i can access 'ChangeBag()' function
     [SerializeField] private GameObject heatControl;
@@ -38,8 +42,16 @@ public class ShopManager : MonoBehaviour
         CheckShopSaveFile();
     }
 
+    private void Update()
+    {
+        //Display value of our currency 
+        testCurrencyText.text = testCurrency.ToString();
+        testSpecialCurrencyText.text = testSpecialCurrency.ToString();
+    }
+
+
     //Not sure if this helps or not. Will check if the booleans are true, if they are then the buttons will be set up correctly.
-    private void CheckShopSaveFile()
+    public void CheckShopSaveFile()
     {
         if (lunchBagPurchased)
         {

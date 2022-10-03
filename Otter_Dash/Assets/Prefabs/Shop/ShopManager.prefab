@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testCurrency: 1000
   testSpecialCurrency: 2
+  testCurrencyText: {fileID: 0}
+  testSpecialCurrencyText: {fileID: 0}
   heatControl: {fileID: 0}
   myPurchaseButtons:
   - {fileID: 0}

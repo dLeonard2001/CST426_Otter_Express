@@ -2734,6 +2734,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e7583f28e8e427b4898377625111021c, type: 3}
   - {fileID: 8300000, guid: a977f46589af7d2419a992361729733f, type: 3}
   - {fileID: 8300000, guid: c4271edacde346140b4b5271226bfb36, type: 3}
+  - {fileID: 8300000, guid: 694e8bf690cc93f4cbc1e8a26946d02d, type: 3}
+  - {fileID: 8300000, guid: 72be7b1aafa20f9459583a1b9a6b5f60, type: 3}
   songNameText: {fileID: 7298145971870215704}
   currentSong: 0
   playPauseGameObjectButton: {fileID: 577034659}
