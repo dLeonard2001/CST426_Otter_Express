@@ -14,9 +14,11 @@ public class PhoneControls : MonoBehaviour
     
 
     
-    
-    
-    //Settings Screen
+    //Shop Screen
+    [Header("Shop App")]
+    public GameObject shopPanel;
+
+        //Settings Screen
     [Header("Settings App")] 
     public GameObject settingsPanel;
     
@@ -29,8 +31,8 @@ public class PhoneControls : MonoBehaviour
     public GameObject dashPageMiddle;
     public GameObject homePageMiddle;
     public GameObject musicPageMiddle;
-    
-    
+
+
     [Header("Otter Express App parts")]
     //Start Dash Button Text
     public GameObject dashNowButton;
@@ -44,8 +46,11 @@ public class PhoneControls : MonoBehaviour
 
 
 
+    //Music Variables
     [Header("Music list")]
     public List<AudioClip> mySongs = new List<AudioClip>();
+
+    public TextMeshProUGUI songNameText;
 
     private bool firstTimeUsingMusicApp = true;
 
@@ -53,6 +58,14 @@ public class PhoneControls : MonoBehaviour
     [Header("Testing current song location")]
     public int currentSong  = 0;
     private bool songIsPaused = true;
+
+    [Header("Player/Pause images (private variables)")] 
+    [SerializeField] private GameObject playPauseGameObjectButton;
+    [SerializeField] private Sprite playImage;
+    [SerializeField] private Sprite pauseImage;
+    
+    
+    
 
 
     //Phone animations
@@ -111,7 +124,12 @@ public class PhoneControls : MonoBehaviour
         {
             phoneAnimator.Play("PhoneDown");
         }
-        
+
+        //If song is done, go to next song.
+        if (!myAudioSource.isPlaying && !songIsPaused && !firstTimeUsingMusicApp)
+        {
+            NextSong();
+        }
         
     }
 
@@ -127,7 +145,7 @@ public class PhoneControls : MonoBehaviour
         
         //remove music page
         musicPageMiddle.SetActive(false);
-        
+
         //add home page
         homePageMiddle.SetActive(true);
 
@@ -313,23 +331,41 @@ public class PhoneControls : MonoBehaviour
             songIsPaused = true;
         }
 
+        songNameText.text = myAudioSource.clip.name;
+
     }
+
+    //Change the play / pause button 
+    public void ChangePlayPauseImage()
+    {
+        if (songIsPaused)
+        {
+            playPauseGameObjectButton.GetComponent<Image>().sprite = playImage;
+
+        }
+        else
+        {
+            playPauseGameObjectButton.GetComponent<Image>().sprite = pauseImage;
+        }
+    }
+
     
     //NEXT SONG FUNCTION
     public void NextSong()
     {
         myAudioSource.Stop();
-        if (currentSong + 1 > 1)
+        if (currentSong + 1 > mySongs.Count -1)
         {
             currentSong = 0;
         }
         else
         {
-            currentSong =+ 1;
+            currentSong++;
         }
         
         myAudioSource.clip = mySongs[currentSong];
         myAudioSource.Play();
+        songNameText.text = myAudioSource.clip.name;
     }
     
     //PREVIOUS SONG FUNCTION
@@ -338,18 +374,29 @@ public class PhoneControls : MonoBehaviour
         myAudioSource.Stop();
         if (currentSong - 1 < 0)
         {
-            currentSong = 1;
+            currentSong = mySongs.Count - 1;
         }
         else
         {
-           currentSong =- 1;
+           currentSong--;
         }
         myAudioSource.clip = mySongs[currentSong];
         myAudioSource.Play();
+        songNameText.text = myAudioSource.clip.name;
     }
-    
-    
-    
+
+
+
+
+
+    //============== SHOP FUNCITONS ================= //
+
+    public void ShopAppStart()
+    {
+        PauseGame();
+        shopPanel.SetActive(true);
+        
+    }
     
     
     
@@ -378,9 +425,17 @@ public class PhoneControls : MonoBehaviour
     public void UnpauseGame()
     {
         settingsPanel.SetActive(false);
+        shopPanel.SetActive(false);
         Time.timeScale = 1f;
         AudioListener.pause = false;
     }
-    
+
+
+
+    public void ExitGame()
+    {
+        Debug.Log("You are exiting the game!");
+        Application.Quit();
+    }
     
 }
