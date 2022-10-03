@@ -363,6 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentImageComponent: {fileID: 7179255054090616679}
+  bagName: WhackAssBag
   OnFoodTooCold:
     m_PersistentCalls:
       m_Calls:
