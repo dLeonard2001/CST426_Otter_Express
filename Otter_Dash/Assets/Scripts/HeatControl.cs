@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -18,6 +19,7 @@ public class HeatControl : MonoBehaviour
     private static float lastDeliveryHeatAmmount;
     private string bagName = "WhackAssBag";
     float elapsedTime;
+    private DirectoryInfo dir;
 
     [SerializeField] UnityEvent OnFoodTooCold;
     
@@ -49,7 +51,10 @@ public class HeatControl : MonoBehaviour
         heatCirlceImg.enabled = true;
         
         
-        red = heatCirlceImg.color; //save the initial red color.
+        // red = heatCirlceImg.color; //save the initial red color.
+        // dir = new DirectoryInfo(Application.persistentDataPath);
+        // FileInfo[] info = dir.GetFiles("*.log");
+        // Debug.Log(info[0].Name);
     }
 
     public void changeBag(string bagName)
