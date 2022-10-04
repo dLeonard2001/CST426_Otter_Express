@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &123214733680936706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 123214733680936708}
+  - component: {fileID: 123214733680936707}
+  - component: {fileID: 123214733680936709}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: b845ff13334e2d64db45da5fc92caf9f, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &123214733680936708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123214733680936706}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 829.31396, y: -80.49489, z: 571.6901}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &123214733680936707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123214733680936706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a835d352a53354f8e79fe6ecc26cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dBoostsLootParentObj: {fileID: 0}
+  itemToSpawn:
+  - item: {fileID: 1069410072522542640, guid: c68929b8af3126d468905801f08a6e35, type: 3}
+    spawnRate: 5
+    minSpawnProb: 0
+    maxSpawnProb: 0
+  - item: {fileID: 2829396964061642151, guid: 62dcfd63a9c8212448f76dd2ccc79bc0, type: 3}
+    spawnRate: 82
+    minSpawnProb: 0
+    maxSpawnProb: 0
+  - item: {fileID: 7752528177040798952, guid: ec96119aebcc25f46b3739d1c47119c2, type: 3}
+    spawnRate: 10
+    minSpawnProb: 0
+    maxSpawnProb: 0
+  - item: {fileID: 8428958481663860478, guid: 3ce1e16f6b4f1ba458d96d5762d183c3, type: 3}
+    spawnRate: 3
+    minSpawnProb: 0
+    maxSpawnProb: 0
+  deliveryBootsItemsToSpawn:
+  - item: {fileID: 8808116906324952537, guid: 18f04eeb30425fb4daa69a394dd908d3, type: 3}
+    spawnRate: 100
+    minSpawnProb: 0
+    maxSpawnProb: 0
+  regularspawnLocations: []
+  dBoostsSpawnLocations: []
+--- !u!114 &123214733680936709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123214733680936706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53ab2fa3da326948b7ba722dc1f2efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinCount: 0
+  specialCoinCount: 0
+  playerAccountName: Account1
+  purchasedItems: 000

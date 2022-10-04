@@ -9,6 +9,8 @@ TagManager:
   - Car
   - empty
   - occupied
+  - shell
+  - heat
   layers:
   - Default
   - TransparentFX

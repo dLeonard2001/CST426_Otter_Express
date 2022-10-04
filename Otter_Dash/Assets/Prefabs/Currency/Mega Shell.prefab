@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1069410072522542647}
   m_Layer: 0
   m_Name: Mega Shell
-  m_TagString: Untagged
+  m_TagString: shell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

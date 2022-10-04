@@ -12,8 +12,8 @@ public class lootSpawner : MonoBehaviour
     public loot[] itemToSpawn; //list of regular item to spawn
     public loot[] deliveryBootsItemsToSpawn; // items like heat, or nitro boost etc.
     
-    private Transform[] regularspawnLocations;
-    private Transform[] dBoostsSpawnLocations; //delivery boost spawn locations
+    public Transform[] regularspawnLocations;
+    public Transform[] dBoostsSpawnLocations; //delivery boost spawn locations
     private GameObject regularLootParentObj; // all loots spawn below parent
 
 
@@ -23,8 +23,8 @@ public class lootSpawner : MonoBehaviour
     {
         //dBoostsLootParentObj = GameObject.Find("---- bootLoots ----"); 
         regularLootParentObj = GameObject.Find("---- Loots ----"); 
-        regularspawnLocations = GameObject.Find("--- Locations ---").GetComponentsInChildren<Transform>();
-        dBoostsSpawnLocations = GameObject.Find("--- DB Locations ---").GetComponentsInChildren<Transform>(); 
+        // regularspawnLocations = GameObject.Find("--- Locations ---").GetComponentsInChildren<Transform>();
+        // dBoostsSpawnLocations = GameObject.Find("--- DB Locations ---").GetComponentsInChildren<Transform>(); 
         //delivery boot locations 
         
         setProbabiltyForItems(itemToSpawn);
@@ -79,7 +79,7 @@ public class lootSpawner : MonoBehaviour
 
     private void spawnRegularLoot()
     {
-        for( int x = 1; x < regularspawnLocations.Length; x++)
+        for( int x = 0; x < regularspawnLocations.Length; x++)
         {
             
             spawnner(regularLootParentObj,regularspawnLocations[x], itemToSpawn);
@@ -89,7 +89,7 @@ public class lootSpawner : MonoBehaviour
     private void spawnDeliveryBoosts()
     {
         Debug.Log(dBoostsSpawnLocations.Length);
-        for( int x = 1; x < dBoostsSpawnLocations.Length; x++)
+        for( int x = 0; x < dBoostsSpawnLocations.Length; x++)
         {
             
             spawnner(dBoostsLootParentObj, dBoostsSpawnLocations[x], deliveryBootsItemsToSpawn);

@@ -39,7 +39,6 @@ public class HeatControl : MonoBehaviour
     private void Awake()
     {
         foodState = FoodState.HOT;
-        Debug.Log("heyyyy");
 
     }
 

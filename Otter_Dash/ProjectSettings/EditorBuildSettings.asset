@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/OliseStart.unity
-    guid: 05c6c89db3295e84a90717b956319361
+    path: Assets/Scenes/Start.unity
+    guid: 3b05465d0d8c98c47b45aa0440ef405f
   - enabled: 1
-    path: Assets/Scenes/Olise's Scene2.unity
-    guid: e2f2154e52006284182ef9367af6a0a1
+    path: Assets/Scenes/main_game 1.unity
+    guid: 51dcde4e1a15f224f8c523b5a89709c3
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: db69fdb7faf419b4fb83c9a4651e95f2, type: 2}
