@@ -43,6 +43,11 @@ namespace Barmetler.RoadSystem
 			lineRenderer.widthMultiplier = LineWidth;
 		}
 
+		public void setLineWidth(float ammount)
+		{
+			LineWidth = ammount;
+		}
+
 		Vector3[] UpdateData()
 		{
 			var points = navigator.CurrentPoints.Select(e => e.position).ToList();

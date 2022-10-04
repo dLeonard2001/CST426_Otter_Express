@@ -9,10 +9,16 @@ using Image = UnityEngine.UI.Image;
 public class HeatControl : MonoBehaviour
 {
     private BagScriptableObject bag; // a scriptable object.
-    private float keepWarmStrength; // how many sec that goes by before the heat meter drops by drop rate.
+    [Tooltip("how many sec that goes by before the heat meter drops by drop rate.")]
+    private float keepWarmStrength; 
     //private float foodHotness = 100; //every food starts with a 100 heat
     private const float HEAT_DROP_RATE = 0.02f;
     public Image parentImageComponent;
+<<<<<<< Updated upstream
+=======
+    private static float lastDeliveryHeatAmmount;
+    private string bagName = "WhackAssBag";
+>>>>>>> Stashed changes
     float elapsedTime;
     
 
@@ -24,19 +30,36 @@ public class HeatControl : MonoBehaviour
 
     private Image heatCirlceImg;
     // Start is called before the first frame update
+<<<<<<< Updated upstream
     
+=======
+    public static FoodState foodState;
+
+    private void Awake()
+    {
+        foodState = FoodState.HOT;
+        Debug.Log("heyyyy");
+
+    }
+>>>>>>> Stashed changes
 
     void Start()
     {
-        bag = Resources.Load<BagScriptableObject>("ScriptableOBJ/WhackAssBag");
-        keepWarmStrength = bag.keepWarmStrength;
-        parentImageComponent.sprite= bag.bagPicture; // adds bag picture
+        changeBag(bagName);
         parentImageComponent.enabled = true;
         heatCirlceImg = GetComponent<Image>();
         heatCirlceImg.enabled = true;
         
         red = heatCirlceImg.color; //save the initial red color.
     }
+
+    public void changeBag(string bagName)
+    {
+        bag = Resources.Load<BagScriptableObject>("ScriptableOBJ/"+ bagName);
+        keepWarmStrength = bag.keepWarmStrength;
+        parentImageComponent.sprite= bag.bagPicture; // adds bag picture
+    } 
+    
 
     // Update is called once per frame
     void Update()

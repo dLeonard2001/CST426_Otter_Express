@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: Order2
   m_EditorClassIdentifier: 
   orderId: 2
-  baseShellReward: 0
-  tipPotential: 0
+  baseShellReward: 75
+  tipPotential: 30
   customersMessage: 
   customersOrder: 
   foodTemperature: 0
   orderAcceptTimer: 0
+<<<<<<< Updated upstream
   pickUpLocation: {fileID: 3455510539436987318, guid: cc89638d77c96e7458df6043fb9b9a8c, type: 3}
   deliveryLocation: {fileID: 4777738945244286197, guid: 6a9c3e4cec3c0074593db80c327d0138, type: 3}
   myPickUpLocation: {x: 0, y: 0, z: 0}
   myDeliveryLocation: {x: 0, y: 0, z: 60}
+=======
+>>>>>>> Stashed changes
