@@ -6,6 +6,9 @@ TagManager:
   tags:
   - PickUpLocation
   - DropOffLocation
+  - Car
+  - empty
+  - occupied
   layers:
   - Default
   - TransparentFX
