@@ -4,6 +4,8 @@
  * This is distributed under the MIT Licence (see LICENSE.md for details)
  */
 
+using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -12,6 +14,7 @@ using UnityEngine;
 #endif
 
 [assembly: InternalsVisibleTo("VehicleBehaviour.Dots")]
+
 namespace VehicleBehaviour {
     [RequireComponent(typeof(Rigidbody))]
     public class WheelVehicle : MonoBehaviour {
@@ -35,6 +38,10 @@ namespace VehicleBehaviour {
         string driftInput => m_Inputs.DriftInput;
 	    string boostInput => m_Inputs.BoostInput;
         
+        private bool isReplaying;
+        private Command.Command commandThrottle, commandBrake, commandTurn, commandDrift, commandJump, commandBoost;
+        private List<Command.Command> commands = new List<Command.Command>();
+
         /* 
          *  Turn input curve: x real input, y value used
          *  My advice (-1, -1) tangent x, (0, 0) tangent 0 and (1, 1) tangent x
@@ -262,6 +269,20 @@ namespace VehicleBehaviour {
         
         // Update everything
         void FixedUpdate () {
+            if (isReplaying)
+            {
+                return;
+            }
+
+            if (Input.GetKey(KeyCode.LeftAlt))
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
+            }else 
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
             // Mesure current speed
             speed = transform.InverseTransformDirection(rb.velocity).z * 3.6f;
 
@@ -285,6 +306,7 @@ namespace VehicleBehaviour {
             // Direction
             foreach (WheelCollider wheel in turnWheel)
             {
+                // commandTurn.Execute();
                 wheel.steerAngle = Mathf.Lerp(wheel.steerAngle, steering, steerSpeed);
             }
 
@@ -308,6 +330,7 @@ namespace VehicleBehaviour {
             {
                 foreach (WheelCollider wheel in driveWheel)
                 {
+                    // commandThrottle.Execute();
                     wheel.motorTorque = throttle * motorTorque.Evaluate(speed) * diffGearing / driveWheel.Length;
                 }
             }
@@ -315,25 +338,35 @@ namespace VehicleBehaviour {
             {
                 foreach (WheelCollider wheel in wheels)
                 {
+                    // commandBrake.Execute();
                     wheel.brakeTorque = Mathf.Abs(throttle) * brakeForce;
                 }
             }
 
             // Jump
             if (jumping && isPlayer) {
+                // turn this
                 if (!IsGrounded)
                     return;
-                
                 rb.velocity += transform.up * jumpVel;
+                // into 
+                
+                // commandJump.Execute();
             }
 
             // Boost
             if (boosting && allowBoost && boost > 0.1f) {
+                // turn this 
                 rb.AddForce(transform.forward * boostForce);
 
                 boost -= Time.fixedDeltaTime;
                 if (boost < 0f) { boost = 0f; }
-
+                
+                // into 
+                
+                // commandBoost.Execute();
+                
+                
                 if (boostParticles.Length > 0 && !boostParticles[0].isPlaying) {
                     foreach (ParticleSystem boostParticle in boostParticles) {
                         boostParticle.Play();
@@ -357,6 +390,7 @@ namespace VehicleBehaviour {
 
             // Drift
             if (drift && allowDrift) {
+                // turn this
                 Vector3 driftForce = -transform.right;
                 driftForce.y = 0.0f;
                 driftForce.Normalize();
@@ -364,13 +398,16 @@ namespace VehicleBehaviour {
                 if (steering != 0)
                     driftForce *= rb.mass * speed/7f * throttle * steering/steerAngle;
                 Vector3 driftTorque = transform.up * 0.1f * steering/steerAngle;
-
-
+                
                 rb.AddForce(driftForce * driftIntensity, ForceMode.Force);
-                rb.AddTorque(driftTorque * driftIntensity, ForceMode.VelocityChange);             
+                rb.AddTorque(driftTorque * driftIntensity, ForceMode.VelocityChange);
+                // into this
+                
+                // commandDrift.Execute();
             }
             
             // Downforce
+            // for command pattern need to apply downward force the entire time during replay
             rb.AddForce(-transform.up * speed * downforce);
         }
 
@@ -402,4 +439,7 @@ namespace VehicleBehaviour {
 #endif
         }
     }
+    
+    
+    
 }

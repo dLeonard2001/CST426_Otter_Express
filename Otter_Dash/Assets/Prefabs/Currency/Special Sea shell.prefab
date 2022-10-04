@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8428958481663860473}
   m_Layer: 0
   m_Name: Special Sea shell
-  m_TagString: Untagged
+  m_TagString: shell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

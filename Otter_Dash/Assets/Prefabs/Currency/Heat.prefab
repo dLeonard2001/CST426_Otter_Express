@@ -107,13 +107,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8808116906324952537}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2c642bd695568a46817e17cdc7062bb, type: 3}
+  m_Script: {fileID: 11500000, guid: e0b67e782d2cd4b45a1906cb31455e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounciness: 0.2
-  diAppearTime: 5
-  type: heat
-  worth: 0.05
+  parentImageComponent: {fileID: 0}
+  OnFoodTooCold:
+    m_PersistentCalls:
+      m_Calls: []
+  red: {r: 0, g: 0, b: 0, a: 0}
+  yellow: {r: 0, g: 0, b: 0, a: 0}
+  blue: {r: 0, g: 0, b: 0, a: 0}
 --- !u!54 &8808116906324952542
 Rigidbody:
   m_ObjectHideFlags: 0
