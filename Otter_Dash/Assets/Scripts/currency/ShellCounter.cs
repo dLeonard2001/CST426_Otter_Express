@@ -26,6 +26,11 @@ public class ShellCounter : MonoBehaviour
     {
         coinCountUI.text = (int.Parse(coinCountUI.text) + Mathf.CeilToInt(count)).ToString();
     }
+    
+    public static int getCoinCount()
+    {
+        return int.Parse(coinCountUI.text); //gets the current coin count.
+    }
 
     
 }
