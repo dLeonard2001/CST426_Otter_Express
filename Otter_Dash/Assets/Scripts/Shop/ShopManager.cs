@@ -46,9 +46,7 @@ public class ShopManager : MonoBehaviour
         myInventory.Add("LunchBag", "0");
         myInventory.Add("StyrofoamBag", "0");
         myInventory.Add("PremiumBag", "0");
-
-
-
+        
         CheckShopSaveFile();
     }
 
@@ -77,18 +75,21 @@ public class ShopManager : MonoBehaviour
         {
             myPurchaseButtons[0].SetActive(false);
             myEquipButtons[0].SetActive(true);
+            myInventory["LunchBag"] = "1";
         }
 
         if (StyrofoamBagPurchased)
         {
             myPurchaseButtons[1].SetActive(false);
             myEquipButtons[1].SetActive(true);
+            myInventory["StyrofoamBag"] = "1";
         }
 
         if (PremiumBagPurchased)
         {
             myPurchaseButtons[2].SetActive(false);
             myEquipButtons[2].SetActive(true);
+            myInventory["PremiumBag"] = "1";
         }
     }
 
@@ -114,11 +115,7 @@ public class ShopManager : MonoBehaviour
                 //Dictionary update
                 myInventory["LunchBag"] = "1";
                 
-                //Debug to see if correct values in dictionary 
-                foreach (var pair in myInventory)
-                {
-                    Debug.Log(pair.Value.ToString());
-                }
+
             }
             else
             {
@@ -144,11 +141,7 @@ public class ShopManager : MonoBehaviour
                 //Dictionary Update
                 myInventory["StyrofoamBag"] = "1";
                 
-                //Debug to see if correct values in dictionary 
-                foreach (var pair in myInventory)
-                {
-                    Debug.Log(pair.Value.ToString());
-                }
+
             }
             else
             {
@@ -176,11 +169,7 @@ public class ShopManager : MonoBehaviour
                 //Dictionary Update
                 myInventory["PremiumBag"] = "1";
                 
-                //Debug to see if correct values in dictionary 
-                foreach (var pair in myInventory)
-                {
-                    Debug.Log(pair.Value.ToString());
-                }
+
             }
             else
             {
@@ -211,11 +200,6 @@ public class ShopManager : MonoBehaviour
                 myInventory["LunchBag"] = "1";
                 myInventory["WhackAssBag"] = "E";
                 
-                //Debug to see if correct values in dictionary 
-                foreach (var pair in myInventory)
-                {
-                    Debug.Log(pair.Value.ToString());
-                }
                 
             }else if (!lunchBagEquiped)
             {
@@ -255,11 +239,7 @@ public class ShopManager : MonoBehaviour
                 premiumBagEquiped = false;
                 
                 
-                //Debug to see if correct values in dictionary 
-                foreach (var pair in myInventory)
-                {
-                    Debug.Log(pair.Value.ToString());
-                }
+
                 
                 
             }
@@ -280,11 +260,7 @@ public class ShopManager : MonoBehaviour
                 myInventory["StyrofoamBag"] = "1";
                 myInventory["WhackAssBag"] = "E";
                 
-                //Debug to see if correct values in dictionary 
-                foreach (var pair in myInventory)
-                {
-                    Debug.Log(pair.Value.ToString());
-                }
+
                 
             }else if (!styrofoamBagEquiped)
             {
@@ -324,11 +300,7 @@ public class ShopManager : MonoBehaviour
                 premiumBagEquiped = false;
                 
                 
-                //Debug to see if correct values in dictionary 
-                foreach (var pair in myInventory)
-                {
-                    Debug.Log(pair.Value.ToString());
-                }
+
                 
             }
         }
@@ -344,11 +316,7 @@ public class ShopManager : MonoBehaviour
                 heatControl.GetComponent<HeatControl>().changeBag("WhackAssBag");
                 premiumBagEquiped = false;
                 
-                //Debug to see if correct values in dictionary 
-                foreach (var pair in myInventory)
-                {
-                    Debug.Log(pair.Value.ToString());
-                }
+ 
                 
             }else if (!premiumBagEquiped)
             {
@@ -385,11 +353,7 @@ public class ShopManager : MonoBehaviour
                 lunchBagEquiped = false;
                 styrofoamBagEquiped = false;
                 
-                //Debug to see if correct values in dictionary 
-                foreach (var pair in myInventory)
-                {
-                    Debug.Log(pair.Value.ToString());
-                }
+  
             }
         }
         
