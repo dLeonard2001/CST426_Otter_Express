@@ -10,12 +10,12 @@ public class ShopManager : MonoBehaviour
 
 
     //Test money.
-    public int testCurrency = 1000;
-    public int testSpecialCurrency = 2;
+    //public int testCurrency = 1000;
+    //public int testSpecialCurrency = 2;
     
     
     public TextMeshProUGUI testCurrencyText;
-    public TextMeshProUGUI testSpecialCurrencyText;
+    //public TextMeshProUGUI testSpecialCurrencyText;
 
     //Reference to heatControl, so i can access 'ChangeBag()' function
     [SerializeField] private GameObject heatControl;
@@ -25,6 +25,9 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private List<GameObject> myPurchaseButtons = new List<GameObject>();
     [SerializeField] private List<GameObject> myEquipButtons = new List<GameObject>();
     [SerializeField] private List<TextMeshProUGUI> myEquipButtonText = new List<TextMeshProUGUI>();
+
+    //Inventory 
+    public Dictionary<string, string> myInventory = new Dictionary<string, string>();
 
     //which bags are purchased
     private bool lunchBagPurchased = false;
@@ -39,16 +42,33 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        myInventory.Add("WhackAssBag", "E");
+        myInventory.Add("LunchBag", "0");
+        myInventory.Add("StyrofoamBag", "0");
+        myInventory.Add("PremiumBag", "0");
+
+
+
         CheckShopSaveFile();
     }
 
     private void Update()
     {
         //Display value of our currency 
-        testCurrencyText.text = testCurrency.ToString();
-        testSpecialCurrencyText.text = testSpecialCurrency.ToString();
+        testCurrencyText.text = ShellCounter.getCoinCount().ToString();
+        //testSpecialCurrencyText.text = testSpecialCurrency.ToString();
     }
 
+
+    public void LoadInPurchasedItems(bool haveLunchBag, bool haveStyrofoamBag, bool havePremiumBag)
+    {
+        lunchBagPurchased = haveLunchBag;
+        StyrofoamBagPurchased = haveStyrofoamBag;
+        PremiumBagPurchased = havePremiumBag;
+        CheckShopSaveFile();
+    }
+    
+    
 
     //Not sure if this helps or not. Will check if the booleans are true, if they are then the buttons will be set up correctly.
     public void CheckShopSaveFile()
@@ -79,7 +99,7 @@ public class ShopManager : MonoBehaviour
         //Purchase LunchBag
         if (bagName == "LunchBag" && !lunchBagPurchased)
         {
-            if (testCurrency >= 100)
+            if (ShellCounter.getCoinCount() >= 100)
             {
                 Debug.Log("you have purchased the LunchBag");
                 myPurchaseButtons[0].SetActive(false);
@@ -87,7 +107,18 @@ public class ShopManager : MonoBehaviour
                 myEquipButtons[0].SetActive(true);
                 
                 //decrease currency
-                testCurrency -= 100;
+                ShellCounter.updateCoinCount(-100);
+                
+                //testCurrency -= 100;
+                
+                //Dictionary update
+                myInventory["LunchBag"] = "1";
+                
+                //Debug to see if correct values in dictionary 
+                foreach (var pair in myInventory)
+                {
+                    Debug.Log(pair.Value.ToString());
+                }
             }
             else
             {
@@ -98,7 +129,7 @@ public class ShopManager : MonoBehaviour
         //Purchase StyrofoamBag
         if (bagName == "StyrofoamBag" && !StyrofoamBagPurchased)
         {
-            if (testCurrency >= 200)
+            if (ShellCounter.getCoinCount() >= 200)
             {
                 Debug.Log("You have purchased the StyrofoamBag");
                 myPurchaseButtons[1].SetActive(false);
@@ -106,7 +137,18 @@ public class ShopManager : MonoBehaviour
                 myEquipButtons[1].SetActive(true);
                 
                 //decrease currency
-                testCurrency -= 200;
+                ShellCounter.updateCoinCount(-200);
+                
+                //testCurrency -= 200;
+                
+                //Dictionary Update
+                myInventory["StyrofoamBag"] = "1";
+                
+                //Debug to see if correct values in dictionary 
+                foreach (var pair in myInventory)
+                {
+                    Debug.Log(pair.Value.ToString());
+                }
             }
             else
             {
@@ -118,7 +160,7 @@ public class ShopManager : MonoBehaviour
         //Purchase PremiumBag
         if (bagName == "PremiumBag" && !PremiumBagPurchased)
         {
-            if (testCurrency >= 300 && testSpecialCurrency >= 1)
+            if (ShellCounter.getCoinCount() >= 300)
             {
                 Debug.Log("You have purchased the PremiumBag");
                 myPurchaseButtons[2].SetActive(false);
@@ -126,8 +168,19 @@ public class ShopManager : MonoBehaviour
                 myEquipButtons[2].SetActive(true);
                 
                 //decrease currency
-                testCurrency -= 300;
-                testSpecialCurrency -= 1;
+                ShellCounter.updateCoinCount(-300);
+                
+                //testCurrency -= 300;
+                //testSpecialCurrency -= 1;
+                
+                //Dictionary Update
+                myInventory["PremiumBag"] = "1";
+                
+                //Debug to see if correct values in dictionary 
+                foreach (var pair in myInventory)
+                {
+                    Debug.Log(pair.Value.ToString());
+                }
             }
             else
             {
@@ -153,15 +206,62 @@ public class ShopManager : MonoBehaviour
                 myEquipButtonText[0].text = "Equip";
                 heatControl.GetComponent<HeatControl>().changeBag("WhackAssBag");
                 lunchBagEquiped = false;
+                
+                //dictionary update
+                myInventory["LunchBag"] = "1";
+                myInventory["WhackAssBag"] = "E";
+                
+                //Debug to see if correct values in dictionary 
+                foreach (var pair in myInventory)
+                {
+                    Debug.Log(pair.Value.ToString());
+                }
+                
             }else if (!lunchBagEquiped)
             {
                 myEquipButtonText[0].text = "Unequip";
                 myEquipButtonText[1].text = "Equip";
                 myEquipButtonText[2].text = "Equip";
                 heatControl.GetComponent<HeatControl>().changeBag(bagName);
+                
+                //Update dictionary to show LunchBag as equiped.
+                myInventory["LunchBag"] = "E";
+                myInventory["WhackAssBag"] = "1";
+                
+                //if we own premium bag but equip LunchBag set StyrofoamBag to 1 else 0 if we don't have it
+                if (StyrofoamBagPurchased)
+                {
+                    myInventory["StyrofoamBag"] = "1";
+                }
+                else
+                {
+                    myInventory["StyrofoamBag"] = "0";
+                }
+
+                //if we own premium bag but equip LunchBag set PremiumBag to 1 else 0 if we don't have it
+                if (PremiumBagPurchased)
+                {
+                    myInventory["PremiumBag"] = "1";
+                }
+                else
+                {
+                    myInventory["PremiumBag"] = "0";
+                }
+                
+                
+                
                 lunchBagEquiped = true;
                 styrofoamBagEquiped = false;
                 premiumBagEquiped = false;
+                
+                
+                //Debug to see if correct values in dictionary 
+                foreach (var pair in myInventory)
+                {
+                    Debug.Log(pair.Value.ToString());
+                }
+                
+                
             }
         }
 
@@ -175,15 +275,61 @@ public class ShopManager : MonoBehaviour
                 myEquipButtonText[1].text = "Equip";
                 heatControl.GetComponent<HeatControl>().changeBag("WhackAssBag");
                 styrofoamBagEquiped = false;
+                
+                //dictionary update
+                myInventory["StyrofoamBag"] = "1";
+                myInventory["WhackAssBag"] = "E";
+                
+                //Debug to see if correct values in dictionary 
+                foreach (var pair in myInventory)
+                {
+                    Debug.Log(pair.Value.ToString());
+                }
+                
             }else if (!styrofoamBagEquiped)
             {
                 myEquipButtonText[1].text = "Unequip";
                 myEquipButtonText[0].text = "Equip";
                 myEquipButtonText[2].text = "Equip";
                 heatControl.GetComponent<HeatControl>().changeBag(bagName);
+                
+                //Update dictionary to show StyrofoamBag as equiped.
+                myInventory["StyrofoamBag"] = "E";
+                myInventory["WhackAssBag"] = "1";
+                
+                //if we own premium bag but equip StyrofoamBag set LunchBag to 1 else 0 if we don't have it
+                if (lunchBagPurchased)
+                {
+                    myInventory["LunchBag"] = "1";
+                }
+                else
+                {
+                    myInventory["LunchBag"] = "0";
+                }
+
+                //if we own premium bag but equip StyrofoamBag set PremiumBag to 1 else 0 if we don't have it
+                if (PremiumBagPurchased)
+                {
+                    myInventory["PremiumBag"] = "1";
+                }
+                else
+                {
+                    myInventory["PremiumBag"] = "0";
+                }
+                
+                
+                
                 styrofoamBagEquiped = true;
                 lunchBagEquiped = false;
                 premiumBagEquiped = false;
+                
+                
+                //Debug to see if correct values in dictionary 
+                foreach (var pair in myInventory)
+                {
+                    Debug.Log(pair.Value.ToString());
+                }
+                
             }
         }
 
@@ -197,15 +343,53 @@ public class ShopManager : MonoBehaviour
                 myEquipButtonText[2].text = "Equip";
                 heatControl.GetComponent<HeatControl>().changeBag("WhackAssBag");
                 premiumBagEquiped = false;
+                
+                //Debug to see if correct values in dictionary 
+                foreach (var pair in myInventory)
+                {
+                    Debug.Log(pair.Value.ToString());
+                }
+                
             }else if (!premiumBagEquiped)
             {
                 myEquipButtonText[2].text = "Unequip";
                 myEquipButtonText[0].text = "Equip";
                 myEquipButtonText[1].text = "Equip";
                 heatControl.GetComponent<HeatControl>().changeBag(bagName);
+                
+                //Update dictionary to show PremiumBag as equiped.
+                myInventory["PremiumBag"] = "E";
+                myInventory["WhackAssBag"] = "1";
+                
+                //if we own premium bag but equip PremiumBag set LunchBag to 1 else 0 if we don't have it
+                if (lunchBagPurchased)
+                {
+                    myInventory["LunchBag"] = "1";
+                }
+                else
+                {
+                    myInventory["LunchBag"] = "0";
+                }
+
+                //if we own premium bag but equip PremiumBag set StyrofoamBag to 1 else 0 if we don't have it
+                if (StyrofoamBagPurchased)
+                {
+                    myInventory["StyrofoamBag"] = "1";
+                }
+                else
+                {
+                    myInventory["StyrofoamBag"] = "0";
+                }
+
                 premiumBagEquiped = true;
                 lunchBagEquiped = false;
                 styrofoamBagEquiped = false;
+                
+                //Debug to see if correct values in dictionary 
+                foreach (var pair in myInventory)
+                {
+                    Debug.Log(pair.Value.ToString());
+                }
             }
         }
         
