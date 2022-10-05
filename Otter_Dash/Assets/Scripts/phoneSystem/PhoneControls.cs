@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -436,6 +437,13 @@ public class PhoneControls : MonoBehaviour
     {
         Debug.Log("You are exiting the game!");
         Application.Quit();
+    }
+
+
+    public void GoToMainMenu()
+    {
+        //Load first scene (should be start / main menu)
+        SceneManager.LoadScene(0);
     }
     
 }
