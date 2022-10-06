@@ -10,13 +10,16 @@ public class ShellCounter : MonoBehaviour
      private static TextMeshProUGUI coinCountUI;
      private PlayerAccount playerAccount;
 
+     private float currentCoinAmount;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()    
     {
         
         //Debug.Log(bag.keepWarmStrength);
         coinCountUI = GetComponent<TextMeshProUGUI>();
         playerAccount = FindObjectOfType<PlayerAccount>();
+        
     }
 
     // Update is called once per frame

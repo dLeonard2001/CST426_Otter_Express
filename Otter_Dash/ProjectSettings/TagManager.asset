@@ -11,6 +11,7 @@ TagManager:
   - occupied
   - shell
   - heat
+  - data
   layers:
   - Default
   - TransparentFX
