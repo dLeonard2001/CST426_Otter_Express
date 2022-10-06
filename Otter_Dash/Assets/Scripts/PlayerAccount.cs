@@ -2,14 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerAccount : MonoBehaviour
 { // player account itself
-    public int coinCount = 0;
+    public int coinCount;
     public static string accountNameToLoad;
+    private String[] updatedPurchasedItemsList;
     [HideInInspector]public int specialCoinCount = 0;
     public string playerAccountName = "Account1";
-    [HideInInspector]public string purchasedItems = "E000";
+    public string purchasedItems = "E000";
+    [SerializeField] private UnityEvent OnLoad;
+    private ShopManager shopManager;
+    
     // each 0 represent the items you can buy from a store
     //index 0 is for Whack ass bag
     //index 1 is for lunch bag
@@ -23,17 +28,34 @@ public class PlayerAccount : MonoBehaviour
 
     private void Start()
     {
+        shopManager = FindObjectOfType<ShopManager>();
+        
         if (accountNameToLoad != null)
         {
             playerAccountName = accountNameToLoad;
 
         }
+        
         loadPlayer();
 
     }
 
     public void savePlayer()
     {
+        coinCount = ShellCounter.getCoinCount();
+        if (!shopManager)
+        {
+            shopManager = FindObjectOfType<ShopManager>();
+
+        }
+        
+        //updatedPurchasedItemsList = shopManager.myInventory.Values.ToList();;
+        //purchasedItems = "";
+       /* for (int x = 0; x < updatedPurchasedItemsList.Length; x++)
+        {
+            purchasedItems += updatedPurchasedItemsList[0];
+        }*/
+        
         SaveSystem.savePlayer(this);
     }
 
@@ -51,8 +73,16 @@ public class PlayerAccount : MonoBehaviour
             specialCoinCount = data.specialCoinCount;
             purchasedItems = data.purchasedItems;
         }
-
+        OnLoad.Invoke();
+        //uiCoinCounter.setStartCoinAmmount(coinCount); // set the coin count at start of game
         
+    }
+
+
+    public void updatePlayerAccount()
+    {
+        
+        coinCount = ShellCounter.getCoinCount();
     }
 
     
