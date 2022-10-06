@@ -10,10 +10,11 @@ public class PlayerAccount : MonoBehaviour
     public static string accountNameToLoad;
     private String[] updatedPurchasedItemsList;
     [HideInInspector]public int specialCoinCount = 0;
-    public string playerAccountName = "Account1";
+    public string playerAccountName;
     public string purchasedItems = "E000";
     [SerializeField] private UnityEvent OnLoad;
     private ShopManager shopManager;
+    private GameObject playerData;
     
     // each 0 represent the items you can buy from a store
     //index 0 is for Whack ass bag
@@ -29,13 +30,12 @@ public class PlayerAccount : MonoBehaviour
     private void Start()
     {
         shopManager = FindObjectOfType<ShopManager>();
+        playerData = GameObject.FindWithTag("data");
         
-        if (accountNameToLoad != null)
-        {
-            playerAccountName = accountNameToLoad;
+        Debug.Log(playerData.name);
+        playerAccountName = playerData.GetComponent<player_data_to_pass>().playerName;
+        Debug.Log(playerAccountName);
 
-        }
-        
         loadPlayer();
 
     }
@@ -48,19 +48,20 @@ public class PlayerAccount : MonoBehaviour
             shopManager = FindObjectOfType<ShopManager>();
 
         }
-        
         //updatedPurchasedItemsList = shopManager.myInventory.Values.ToList();;
         //purchasedItems = "";
        /* for (int x = 0; x < updatedPurchasedItemsList.Length; x++)
         {
             purchasedItems += updatedPurchasedItemsList[0];
         }*/
-        
-        SaveSystem.savePlayer(this);
+       playerData = GameObject.FindWithTag("data");
+       playerAccountName = playerData.GetComponent<player_data_to_pass>().playerName;
+       SaveSystem.savePlayer(this);
     }
 
     public void loadPlayer()
     {
+        playerAccountName = playerData.GetComponent<player_data_to_pass>().playerName;
         PlayerData data = SaveSystem.loadPlayer(playerAccountName);
         if (data == null)
         {
@@ -74,7 +75,7 @@ public class PlayerAccount : MonoBehaviour
             purchasedItems = data.purchasedItems;
         }
         OnLoad.Invoke();
-        //uiCoinCounter.setStartCoinAmmount(coinCount); // set the coin count at start of game
+        // ShellCounter.setStartCoinAmmount(coinCount); // set the coin count at start of game
         
     }
 

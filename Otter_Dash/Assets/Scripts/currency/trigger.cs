@@ -20,7 +20,5 @@ public class trigger : MonoBehaviour
                 HeatControl.addMoreHeatToFood(gameobject.worth);
             }
         }
-        
-        
     }
 }

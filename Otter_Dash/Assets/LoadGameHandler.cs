@@ -6,12 +6,15 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class LoadGameHandler : MonoBehaviour
 {
 
     public String accountSelection;
+    public GameObject playerData;
+    public TextMeshProUGUI username_input;
     [SerializeField] UnityEvent OnClickEmptySlot;
     [SerializeField] UnityEvent OnClickOccupiedSlot;
 
@@ -50,7 +53,18 @@ public class LoadGameHandler : MonoBehaviour
 
     public void setLoadingVars()
     {
+        
         PlayerAccount.accountNameToLoad = accountSelection;
+        playerData.GetComponent<player_data_to_pass>().setPlayerNameData(PlayerAccount.accountNameToLoad);
+        DontDestroyOnLoad(playerData);
+    }
+
+    public void setNewPlayerName()
+    {
+        Debug.Log(username_input.text);
+        PlayerAccount.accountNameToLoad = username_input.text;
+        playerData.GetComponent<player_data_to_pass>().setPlayerNameData(PlayerAccount.accountNameToLoad);
+        DontDestroyOnLoad(playerData);
     }
     
 
