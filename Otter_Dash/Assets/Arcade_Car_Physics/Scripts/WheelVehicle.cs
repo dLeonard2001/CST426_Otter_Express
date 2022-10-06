@@ -5,9 +5,13 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 #if MULTIOSCONTROLS
     using MOSC;
@@ -37,8 +41,15 @@ namespace VehicleBehaviour {
         string jumpInput => m_Inputs.JumpInput;
         string driftInput => m_Inputs.DriftInput;
 	    string boostInput => m_Inputs.BoostInput;
-        
+
+        public Image nitroTank;
+        public Text speedText;
+        private bool isBoosting;
         private bool isReplaying;
+        private bool readyToAddNitro;
+        private Queue<float> nitroQueue = new Queue<float>();
+        
+        
         private Command.Command commandThrottle, commandBrake, commandTurn, commandDrift, commandJump, commandBoost;
         private List<Command.Command> commands = new List<Command.Command>();
 
@@ -181,32 +192,28 @@ namespace VehicleBehaviour {
         [HideInInspector] public bool allowBoost = true;
 
         // Maximum boost available
-        [SerializeField] float maxBoost = 10f;
-        public float MaxBoost { get => maxBoost;
-            set => maxBoost = value;
-        }
+        [SerializeField] float maxBoost = 100f;
+        // public float MaxBoost { get => maxBoost;
+        //     set => maxBoost = 100f;
+        // }
 
         // Current boost available
         [SerializeField] float boost = 10f;
-        public float Boost { get => boost;
-            set => boost = Mathf.Clamp(value, 0f, maxBoost);
-        }
+        // public float Boost { get => boost;
+        //     set => boost = Mathf.Clamp(value, 0f, maxBoost);
+        // }
 
         // Regen boostRegen per second until it's back to maxBoost
         [Range(0f, 1f)]
-        [SerializeField] float boostRegen = 0.2f;
-        public float BoostRegen { get => boostRegen;
-            set => boostRegen = Mathf.Clamp01(value);
-        }
 
         /*
          *  The force applied to the car when boosting
          *  NOTE: the boost does not care if the car is grounded or not
          */
-        [SerializeField] float boostForce = 5000;
-        public float BoostForce { get => boostForce;
-            set => boostForce = value;
-        }
+        [SerializeField] public float boostForce = 5000;
+        // public float BoostForce { get => boostForce;
+        //     set => boostForce = value;
+        // }
 
         // Use this to boost when IsPlayer is set to false
         public bool boosting = false;
@@ -230,8 +237,9 @@ namespace VehicleBehaviour {
             if (boostClip != null) {
                 boostSource.clip = boostClip;
             }
-
+            
 		    boost = maxBoost;
+            nitroTank.fillAmount = boost / maxBoost;
 
             rb = GetComponent<Rigidbody>();
             spawnPosition = transform.position;
@@ -254,34 +262,27 @@ namespace VehicleBehaviour {
         // Visual feedbacks and boost regen
         void Update()
         {
+            speedText.text = "Speed: " + Math.Floor(rb.velocity.magnitude);
             foreach (ParticleSystem gasParticle in gasParticles)
             {
                 gasParticle.Play();
                 ParticleSystem.EmissionModule em = gasParticle.emission;
                 em.rateOverTime = handbrake ? 0 : Mathf.Lerp(em.rateOverTime.constant, Mathf.Clamp(150.0f * throttle, 30.0f, 100.0f), 0.1f);
             }
-
-            if (isPlayer && allowBoost) {
-                boost += Time.deltaTime * boostRegen;
-                if (boost > maxBoost) { boost = maxBoost; }
-            }
         }
         
         // Update everything
         void FixedUpdate () {
+            
             if (isReplaying)
             {
                 return;
             }
 
-            if (Input.GetKey(KeyCode.LeftAlt))
+            if (Input.GetKeyDown(KeyCode.LeftAlt))
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.Confined;
-            }else 
-            {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
             }
             // Mesure current speed
             speed = transform.InverseTransformDirection(rb.velocity).z * 3.6f;
@@ -355,25 +356,28 @@ namespace VehicleBehaviour {
             }
 
             // Boost
-            if (boosting && allowBoost && boost > 0.1f) {
-                // turn this 
-                rb.AddForce(transform.forward * boostForce);
-
-                boost -= Time.fixedDeltaTime;
-                if (boost < 0f) { boost = 0f; }
+            if (boosting && hasNitro()) {
+                // turn this
+                Debug.Log(boost);
+                if (!isBoosting)
+                {
+                    StartCoroutine(useNitro());
+                }
+                // boost -= Time.fixedDeltaTime;
+                // if (boost < 0f) { boost = 0f; }
                 
                 // into 
                 
                 // commandBoost.Execute();
                 
                 
-                if (boostParticles.Length > 0 && !boostParticles[0].isPlaying) {
+                if (boostParticles.Length > 0 && !boostParticles[0].isPlaying && hasNitro()) {
                     foreach (ParticleSystem boostParticle in boostParticles) {
                         boostParticle.Play();
                     }
                 }
 
-                if (boostSource != null && !boostSource.isPlaying) {
+                if (boostSource != null && !boostSource.isPlaying && hasNitro()) {
                     boostSource.Play();
                 }
             } else {
@@ -409,6 +413,7 @@ namespace VehicleBehaviour {
             // Downforce
             // for command pattern need to apply downward force the entire time during replay
             rb.AddForce(-transform.up * speed * downforce);
+            
         }
 
         // Reposition the car to the start position
@@ -424,6 +429,90 @@ namespace VehicleBehaviour {
         {
             handbrake = h;
         }
+
+        // NITRO BOOST FOR PLAYER
+        #region NitroBoost
+
+        public IEnumerator useNitro()
+        {
+            isBoosting = true;
+            float boostToLose = 10;
+            if (boost > 0)
+            {
+                boost -= boostToLose;
+                float currentNitroTankAmount = nitroTank.fillAmount;
+                while (nitroTank.fillAmount > currentNitroTankAmount - 1/boostToLose)
+                {
+                    if (nitroTank.fillAmount == 0)
+                    {
+                        isBoosting = false;
+                        StopAllCoroutines();
+                    }
+                    
+                    rb.AddForce(transform.forward * boostForce * 3);
+                    
+                    nitroTank.fillAmount -= 1 / boostToLose * Time.deltaTime;
+                    yield return null;
+                }
+            }
+            else
+            {
+                Debug.Log("no more nitro to use, must buy more");
+            }
+
+            isBoosting = false;
+
+        }
+
+        public bool hasNitro()
+        {
+            return boost > 0;
+        }
+
+        public bool isNitroFull()
+        {
+            return Mathf.CeilToInt(boost) == Mathf.CeilToInt(maxBoost);
+        }
+
+        public void addNitro(float nitroToAdd)
+        {
+            StopAllCoroutines();
+            boost += nitroToAdd;
+            Debug.Log(boost);
+            nitroTank.fillAmount = boost / maxBoost;
+        }
+
+        // public IEnumerator AddNitroCoroutine(float nitroToAdd)
+        // {
+        //     while(Time.timeScale == 0)
+        //     {
+        //         yield return null;
+        //     }
+        //     
+        //     if (boost < maxBoost)
+        //     {
+        //         boost += nitroToAdd;
+        //         float currentNitroTankAmount = nitroTank.fillAmount;
+        //         while (nitroTank.fillAmount < currentNitroTankAmount + 1/nitroToAdd)
+        //         {
+        //             if (nitroTank.fillAmount == 1)
+        //             {
+        //                 readyToAddNitro = false;
+        //                 StopCoroutine(nameof(AddNitroCoroutine));
+        //             }
+        //             Debug.Log(nitroTank.fillAmount);
+        //             nitroTank.fillAmount += 1 / nitroToAdd * Time.deltaTime;
+        //             yield return null;
+        //         }
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("nitro tank is full! Go drive fast!");
+        //     }
+        //
+        //     readyToAddNitro = false;
+        // }
+        #endregion
 
         // MULTIOSCONTROLS is another package I'm working on ignore it I don't know if it will get a release.
 #if MULTIOSCONTROLS

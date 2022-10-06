@@ -88,7 +88,7 @@ public class lootSpawner : MonoBehaviour
     
     private void spawnDeliveryBoosts()
     {
-        Debug.Log(dBoostsSpawnLocations.Length);
+        // Debug.Log(dBoostsSpawnLocations.Length);
         for( int x = 0; x < dBoostsSpawnLocations.Length; x++)
         {
             

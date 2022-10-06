@@ -394,7 +394,7 @@ public class PhoneControls : MonoBehaviour
 
     public void ShopAppStart()
     {
-        PauseGame();
+        PauseGame(0.01f);
         shopPanel.SetActive(true);
         
     }
@@ -408,16 +408,18 @@ public class PhoneControls : MonoBehaviour
     //SETTINGS APP START FUNCTION
     public void SettingsAppStart()
     {
-        PauseGame();
+        PauseGame(0);
         settingsPanel.SetActive(true);
     }
     
     
 
     //PAUSE GAME FUNCTION
-    private void PauseGame()
+    private void PauseGame(float timeScale)
     {
-        Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        Time.timeScale = timeScale;
         AudioListener.pause = true;
     }
 
@@ -425,6 +427,8 @@ public class PhoneControls : MonoBehaviour
     //UNPAUSE GAME FUNCTION
     public void UnpauseGame()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         settingsPanel.SetActive(false);
         shopPanel.SetActive(false);
         Time.timeScale = 1f;
@@ -443,6 +447,8 @@ public class PhoneControls : MonoBehaviour
     public void GoToMainMenu()
     {
         //Load first scene (should be start / main menu)
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
         SceneManager.LoadScene(0);
     }
     
