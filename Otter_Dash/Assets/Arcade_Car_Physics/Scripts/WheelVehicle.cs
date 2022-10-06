@@ -47,10 +47,11 @@ namespace VehicleBehaviour {
         private bool isBoosting;
         private bool isReplaying;
         private bool readyToAddNitro;
-        private Queue<float> nitroQueue = new Queue<float>();
-        
-        
-        private Command.Command commandThrottle, commandBrake, commandTurn, commandDrift, commandJump, commandBoost;
+        private bool mouseUnlocked;
+
+        private Command.Command commandAccelerate, commandBrake, commandTurnLeft, commandDrift, commandJump, commandBoost;
+        private List<float> steeringDirections = new List<float>();
+        private List<float> throttleDirections = new List<float>();
         private List<Command.Command> commands = new List<Command.Command>();
 
         /* 
@@ -279,10 +280,16 @@ namespace VehicleBehaviour {
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftAlt))
+            if (Input.GetKeyDown(KeyCode.LeftAlt) && !mouseUnlocked)
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.Confined;
+                mouseUnlocked = true;
+            }else if (Input.GetKeyDown(KeyCode.LeftAlt) && mouseUnlocked)
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                mouseUnlocked = false;
             }
             // Mesure current speed
             speed = transform.InverseTransformDirection(rb.velocity).z * 3.6f;
@@ -307,7 +314,8 @@ namespace VehicleBehaviour {
             // Direction
             foreach (WheelCollider wheel in turnWheel)
             {
-                // commandTurn.Execute();
+                commands.Add(commandTurnLeft);
+                steeringDirections.Add(steering);
                 wheel.steerAngle = Mathf.Lerp(wheel.steerAngle, steering, steerSpeed);
             }
 
@@ -329,14 +337,17 @@ namespace VehicleBehaviour {
             }
             else if (throttle != 0 && (Mathf.Abs(speed) < 4 || Mathf.Sign(speed) == Mathf.Sign(throttle)))
             {
+                commands.Add(commandAccelerate);
+                throttleDirections.Add(throttle);
                 foreach (WheelCollider wheel in driveWheel)
                 {
-                    // commandThrottle.Execute();
+                    commands.Add(commandAccelerate);
                     wheel.motorTorque = throttle * motorTorque.Evaluate(speed) * diffGearing / driveWheel.Length;
                 }
             }
             else if (throttle != 0)
             {
+                throttleDirections.Add(throttle);
                 foreach (WheelCollider wheel in wheels)
                 {
                     // commandBrake.Execute();
@@ -349,6 +360,7 @@ namespace VehicleBehaviour {
                 // turn this
                 if (!IsGrounded)
                     return;
+                commands.Add(commandJump);
                 rb.velocity += transform.up * jumpVel;
                 // into 
                 
@@ -361,6 +373,7 @@ namespace VehicleBehaviour {
                 Debug.Log(boost);
                 if (!isBoosting)
                 {
+                    commands.Add(commandBoost);
                     StartCoroutine(useNitro());
                 }
                 // boost -= Time.fixedDeltaTime;
@@ -407,6 +420,7 @@ namespace VehicleBehaviour {
                 rb.AddTorque(driftTorque * driftIntensity, ForceMode.VelocityChange);
                 // into this
                 
+                commands.Add(commandDrift);
                 // commandDrift.Execute();
             }
             
@@ -480,6 +494,17 @@ namespace VehicleBehaviour {
             boost += nitroToAdd;
             Debug.Log(boost);
             nitroTank.fillAmount = boost / maxBoost;
+        }
+
+        public void replayDelivery()
+        {
+            isReplaying = true;
+            ResetPos();
+
+            // for (int i = 0; i < commands.Count; i++)
+            // {
+            //     commands[i].Execute();
+            // }
         }
 
         // public IEnumerator AddNitroCoroutine(float nitroToAdd)

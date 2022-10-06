@@ -8,6 +8,11 @@ using UnityEngine.UI;
 
 public class sceneSwitch : MonoBehaviour
 {
+    public void Awake()
+    {
+        Debug.Log("im waking up");
+    }
+
     public GameObject mainPanel;
     public GameObject controlsPanel;
     public Button startBtn;
@@ -46,7 +51,14 @@ public class sceneSwitch : MonoBehaviour
 
     public void start_btn()
     {
-        i++;
+        i = 1;
+        LoadScene(i);
+    }
+
+    public void back_to_main_menu()
+    {
+        Time.timeScale = 1;
+        i = 0;
         LoadScene(i);
     }
 
@@ -71,7 +83,7 @@ public class sceneSwitch : MonoBehaviour
     {
         transition.SetTrigger("start");
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3f);
         
         SceneManager.LoadSceneAsync(levelIndex);
         
@@ -84,10 +96,10 @@ public class sceneSwitch : MonoBehaviour
             otterImage.enabled = false;
             mainPanel.SetActive(false);
             controlsPanel.SetActive(true);
-            
         }
         else
         {
+             
             mainPanel.SetActive(true);
             otterImage.enabled = true;
             controlsPanel.SetActive(false);

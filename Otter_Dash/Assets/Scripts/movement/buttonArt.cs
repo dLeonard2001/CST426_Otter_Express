@@ -12,6 +12,11 @@ public class buttonArt : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public RectTransform buttonTrans;
     public buttonManager buttonManager;
 
+    private void Start()
+    {
+        buttonTrans = GetComponent<RectTransform>();
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         otterImage.rectTransform.position = buttonTrans.position;

@@ -22,7 +22,6 @@ public class buttonManager : MonoBehaviour
     public void setCurrentButton(RectTransform currentButton)
     {
         this.currentButton = currentButton;
-        Debug.Log(currentButton);
     }
 
     public void setButtonAction(String buttonAction)
@@ -38,7 +37,6 @@ public class buttonManager : MonoBehaviour
     
     private IEnumerator moveImageCoroutine(Image image, String direction)
     {
-        Debug.Log(direction);
         float y_pos = image.rectTransform.position.y;
         if (direction.Equals("up"))
         {
