@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using VehicleBehaviour;
 
 public class ShopManager : MonoBehaviour
 {
@@ -28,6 +30,8 @@ public class ShopManager : MonoBehaviour
 
     //Inventory 
     public Dictionary<string, string> myInventory = new Dictionary<string, string>();
+    public WheelVehicle player;
+    private float wallet;
 
     //which bags are purchased
     private bool lunchBagPurchased = false;
@@ -52,8 +56,9 @@ public class ShopManager : MonoBehaviour
 
     private void Update()
     {
+        
         //Display value of our currency 
-        testCurrencyText.text = ShellCounter.getCoinCount().ToString();
+        testCurrencyText.text = getMoney().ToString();
         //testSpecialCurrencyText.text = testSpecialCurrency.ToString();
     }
 
@@ -100,7 +105,7 @@ public class ShopManager : MonoBehaviour
         //Purchase LunchBag
         if (bagName == "LunchBag" && !lunchBagPurchased)
         {
-            if (ShellCounter.getCoinCount() >= 100)
+            if (getMoney() >= 100)
             {
                 Debug.Log("you have purchased the LunchBag");
                 myPurchaseButtons[0].SetActive(false);
@@ -126,7 +131,7 @@ public class ShopManager : MonoBehaviour
         //Purchase StyrofoamBag
         if (bagName == "StyrofoamBag" && !StyrofoamBagPurchased)
         {
-            if (ShellCounter.getCoinCount() >= 200)
+            if (getMoney() >= 200)
             {
                 Debug.Log("You have purchased the StyrofoamBag");
                 myPurchaseButtons[1].SetActive(false);
@@ -153,7 +158,7 @@ public class ShopManager : MonoBehaviour
         //Purchase PremiumBag
         if (bagName == "PremiumBag" && !PremiumBagPurchased)
         {
-            if (ShellCounter.getCoinCount() >= 300)
+            if (getMoney() >= 300)
             {
                 Debug.Log("You have purchased the PremiumBag");
                 myPurchaseButtons[2].SetActive(false);
@@ -193,23 +198,25 @@ public class ShopManager : MonoBehaviour
                 myEquipButtonText[0].text = "Equip";
                 HeatControl.changeBag("WhackAssBag");
                 lunchBagEquiped = false;
-                
+
                 //dictionary update
                 myInventory["LunchBag"] = "1";
                 myInventory["WhackAssBag"] = "E";
-                
-                
-            }else if (!lunchBagEquiped)
+
+
+            }
+            else if (!lunchBagEquiped)
             {
                 myEquipButtonText[0].text = "Unequip";
                 myEquipButtonText[1].text = "Equip";
                 myEquipButtonText[2].text = "Equip";
+                
                 HeatControl.changeBag(bagName);
                 
                 //Update dictionary to show LunchBag as equiped.
                 myInventory["LunchBag"] = "E";
                 myInventory["WhackAssBag"] = "1";
-                
+
                 //if we own premium bag but equip LunchBag set StyrofoamBag to 1 else 0 if we don't have it
                 if (StyrofoamBagPurchased)
                 {
@@ -229,17 +236,17 @@ public class ShopManager : MonoBehaviour
                 {
                     myInventory["PremiumBag"] = "0";
                 }
-                
-                
-                
+
+
+
                 lunchBagEquiped = true;
                 styrofoamBagEquiped = false;
                 premiumBagEquiped = false;
-                
-                
 
-                
-                
+
+
+
+
             }
         }
 
@@ -254,26 +261,27 @@ public class ShopManager : MonoBehaviour
                 myEquipButtonText[1].text = "Equip";
                 HeatControl.changeBag("WhackAssBag");
                 styrofoamBagEquiped = false;
-                
+
                 //dictionary update
                 myInventory["StyrofoamBag"] = "1";
                 myInventory["WhackAssBag"] = "E";
-                
 
-                
-            }else if (!styrofoamBagEquiped)
+
+
+            }
+            else if (!styrofoamBagEquiped)
             {
                 Debug.Log(9);
                 myEquipButtonText[1].text = "Unequip";
                 myEquipButtonText[0].text = "Equip";
                 myEquipButtonText[2].text = "Equip";
+
                 HeatControl.changeBag(bagName);
 
-                
                 //Update dictionary to show StyrofoamBag as equiped.
                 myInventory["StyrofoamBag"] = "E";
                 myInventory["WhackAssBag"] = "1";
-                
+
                 //if we own premium bag but equip StyrofoamBag set LunchBag to 1 else 0 if we don't have it
                 if (lunchBagPurchased)
                 {
@@ -293,16 +301,16 @@ public class ShopManager : MonoBehaviour
                 {
                     myInventory["PremiumBag"] = "0";
                 }
-                
-                
-                
+
+
+
                 styrofoamBagEquiped = true;
                 lunchBagEquiped = false;
                 premiumBagEquiped = false;
-                
-                
 
-                
+
+
+
             }
         }
 
@@ -316,20 +324,22 @@ public class ShopManager : MonoBehaviour
                 myEquipButtonText[2].text = "Equip";
                 HeatControl.changeBag("WhackAssBag");
                 premiumBagEquiped = false;
-                
- 
-                
-            }else if (!premiumBagEquiped)
+
+
+
+            }
+            else if (!premiumBagEquiped)
             {
                 myEquipButtonText[2].text = "Unequip";
                 myEquipButtonText[0].text = "Equip";
                 myEquipButtonText[1].text = "Equip";
+
                 HeatControl.changeBag(bagName);
 
                 //Update dictionary to show PremiumBag as equiped.
                 myInventory["PremiumBag"] = "E";
                 myInventory["WhackAssBag"] = "1";
-                
+
                 //if we own premium bag but equip PremiumBag set LunchBag to 1 else 0 if we don't have it
                 if (lunchBagPurchased)
                 {
@@ -354,12 +364,36 @@ public class ShopManager : MonoBehaviour
                 premiumBagEquiped = true;
                 lunchBagEquiped = false;
                 styrofoamBagEquiped = false;
-                
-  
+
+
             }
+        }
+
+    }
+
+    public float getMoney()
+    {
+        return ShellCounter.getCoinCount();
+    }
+
+    public void addNitro()
+    {
+        player = GameObject.FindWithTag("Player").GetComponent<WheelVehicle>();
+        if (getMoney() >= 50)
+        {
+            if (player.isNitroFull())
+            {
+                Debug.Log("nitro is full, didnt purchase");
+            }
+            else
+            {
+                Debug.Log("buyiny nitro");
+                player.addNitro(10f);
+                ShellCounter.updateCoinCount(-50);
+            }
+            
         }
         
     }
-
-
+    
 }

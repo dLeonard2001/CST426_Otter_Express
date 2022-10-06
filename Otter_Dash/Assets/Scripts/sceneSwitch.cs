@@ -3,12 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class sceneSwitch : MonoBehaviour
 {
+    public void Awake()
+    {
+        Debug.Log("im waking up");
+    }
+
     public GameObject mainPanel;
     public GameObject controlsPanel;
+    public Button startBtn;
     public bool controlsOn;
+    public Image otterImage;
 
     [Header("Animations")] 
     public Animator transition;
@@ -42,7 +51,14 @@ public class sceneSwitch : MonoBehaviour
 
     public void start_btn()
     {
-        i++;
+        i = 1;
+        LoadScene(i);
+    }
+
+    public void back_to_main_menu()
+    {
+        Time.timeScale = 1;
+        i = 0;
         LoadScene(i);
     }
 
@@ -67,7 +83,7 @@ public class sceneSwitch : MonoBehaviour
     {
         transition.SetTrigger("start");
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3f);
         
         SceneManager.LoadSceneAsync(levelIndex);
         
@@ -77,17 +93,17 @@ public class sceneSwitch : MonoBehaviour
     {
         if (controlsOn)
         {
+            otterImage.enabled = false;
             mainPanel.SetActive(false);
             controlsPanel.SetActive(true);
-            
         }
         else
         {
+             
             mainPanel.SetActive(true);
+            otterImage.enabled = true;
             controlsPanel.SetActive(false);
         }
     }
-
-
-
+    
 }

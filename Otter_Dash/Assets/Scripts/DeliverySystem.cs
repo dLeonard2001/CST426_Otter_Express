@@ -33,14 +33,13 @@ public class DeliverySystem : MonoBehaviour
         job = orderSystem.activeOrder;
         calculateTime(testDistanceMeters);
         DeliveryTimeController.deliveryTimeAllocated = rawTime; // set time behind the scene
-        roadSystemNavigator.Goal = orderSystem.currentPickUpLocation; //set navigation
+        // roadSystemNavigator.Goal = orderSystem.currentPickUpLocation; //set navigation
         // DeliveryTimeController.setStartTime();
     }
 
     public void endCurrentJob()
     {
         job = null;
-        
     }
 
     public void setNavToDropOffLocation()
