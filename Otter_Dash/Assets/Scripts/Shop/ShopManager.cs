@@ -180,8 +180,6 @@ public class ShopManager : MonoBehaviour
 
     }
 
-    
-    
     //EQUIPPING BAGS
     public void EquipBag(string bagName)
     {
@@ -193,7 +191,7 @@ public class ShopManager : MonoBehaviour
             if (lunchBagEquiped)
             {
                 myEquipButtonText[0].text = "Equip";
-                heatControl.GetComponent<HeatControl>().changeBag("WhackAssBag");
+                HeatControl.changeBag("WhackAssBag");
                 lunchBagEquiped = false;
                 
                 //dictionary update
@@ -206,7 +204,7 @@ public class ShopManager : MonoBehaviour
                 myEquipButtonText[0].text = "Unequip";
                 myEquipButtonText[1].text = "Equip";
                 myEquipButtonText[2].text = "Equip";
-                heatControl.GetComponent<HeatControl>().changeBag(bagName);
+                HeatControl.changeBag(bagName);
                 
                 //Update dictionary to show LunchBag as equiped.
                 myInventory["LunchBag"] = "E";
@@ -252,8 +250,9 @@ public class ShopManager : MonoBehaviour
             //then make equip boolean false.
             if (styrofoamBagEquiped)
             {
+                Debug.Log(8);
                 myEquipButtonText[1].text = "Equip";
-                heatControl.GetComponent<HeatControl>().changeBag("WhackAssBag");
+                HeatControl.changeBag("WhackAssBag");
                 styrofoamBagEquiped = false;
                 
                 //dictionary update
@@ -264,10 +263,12 @@ public class ShopManager : MonoBehaviour
                 
             }else if (!styrofoamBagEquiped)
             {
+                Debug.Log(9);
                 myEquipButtonText[1].text = "Unequip";
                 myEquipButtonText[0].text = "Equip";
                 myEquipButtonText[2].text = "Equip";
-                heatControl.GetComponent<HeatControl>().changeBag(bagName);
+                HeatControl.changeBag(bagName);
+
                 
                 //Update dictionary to show StyrofoamBag as equiped.
                 myInventory["StyrofoamBag"] = "E";
@@ -313,7 +314,7 @@ public class ShopManager : MonoBehaviour
             if (premiumBagEquiped)
             {
                 myEquipButtonText[2].text = "Equip";
-                heatControl.GetComponent<HeatControl>().changeBag("WhackAssBag");
+                HeatControl.changeBag("WhackAssBag");
                 premiumBagEquiped = false;
                 
  
@@ -323,8 +324,8 @@ public class ShopManager : MonoBehaviour
                 myEquipButtonText[2].text = "Unequip";
                 myEquipButtonText[0].text = "Equip";
                 myEquipButtonText[1].text = "Equip";
-                heatControl.GetComponent<HeatControl>().changeBag(bagName);
-                
+                HeatControl.changeBag(bagName);
+
                 //Update dictionary to show PremiumBag as equiped.
                 myInventory["PremiumBag"] = "E";
                 myInventory["WhackAssBag"] = "1";
@@ -342,6 +343,7 @@ public class ShopManager : MonoBehaviour
                 //if we own premium bag but equip PremiumBag set StyrofoamBag to 1 else 0 if we don't have it
                 if (StyrofoamBagPurchased)
                 {
+                    
                     myInventory["StyrofoamBag"] = "1";
                 }
                 else

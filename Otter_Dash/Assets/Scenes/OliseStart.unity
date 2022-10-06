@@ -155,6 +155,8 @@ MonoBehaviour:
   mainPanel: {fileID: 583713147}
   controlsPanel: {fileID: 244741658}
   controlsOn: 0
+  transition: {fileID: 0}
+  transitionTime: 0
 --- !u!4 &48214694
 Transform:
   m_ObjectHideFlags: 0
@@ -684,7 +686,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Olise's Scene2
+          m_StringArgument: Olise's Scene3
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1159869210}
@@ -6912,7 +6914,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Olise's Scene2
+          m_StringArgument: Olise's Scene3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1778508486

@@ -15,9 +15,11 @@ public class HeatControl : MonoBehaviour
     private float keepWarmStrength; 
     //private float foodHotness = 100; //every food starts with a 100 heat
     private const float HEAT_DROP_RATE = 0.02f;
+    private static bool changeBagOnStart;
     public Image parentImageComponent;
     private static float lastDeliveryHeatAmmount;
-    private string bagName = "WhackAssBag";
+    private PlayerAccount playerAccount;
+    private static string bagName = "WhackAssBag";
     float elapsedTime;
     private DirectoryInfo dir;
 
@@ -30,7 +32,7 @@ public class HeatControl : MonoBehaviour
 
 
 
-    private static Image heatCirlceImg;
+    public static Image heatCirlceImg;
 
     public enum FoodState {BAD, HOT, WARM, COLD }
     // Start is called before the first frame update
@@ -44,10 +46,10 @@ public class HeatControl : MonoBehaviour
 
     void Start()
     {
-        changeBag(bagName);
         parentImageComponent.enabled = true;
         heatCirlceImg = GetComponent<Image>();
         heatCirlceImg.enabled = true;
+        changeBag(bagName);
         
         
         // red = heatCirlceImg.color; //save the initial red color.
@@ -56,17 +58,32 @@ public class HeatControl : MonoBehaviour
         // Debug.Log(info[0].Name);
     }
 
-    public void changeBag(string bagName)
+    public static void changeBag(string bag)
+    {
+        bagName = bag;
+        changeBagOnStart = true;
+        
+    }
+
+    public void changeBagOnWake()
     {
         bag = Resources.Load<BagScriptableObject>("ScriptableOBJ/"+ bagName);
         keepWarmStrength = bag.keepWarmStrength;
         parentImageComponent.sprite= bag.bagPicture; // adds bag picture
-    } 
+    }
     
+
+
+
 
     // Update is called once per frame
     void Update()
     {
+        if (changeBagOnStart)
+        {
+            changeBagOnWake();
+            changeBagOnStart = false;
+        }
         if (foodState != FoodState.BAD)
         {
             elapsedTime += Time.deltaTime;
@@ -127,6 +144,7 @@ public class HeatControl : MonoBehaviour
 
     void reduceFoodHeat()
     {
+       
         if (heatCirlceImg.fillAmount > 0)
         {
             heatCirlceImg.fillAmount -=HEAT_DROP_RATE;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8689504027251042273}
   - component: {fileID: 8689504027251042302}
+  - component: {fileID: 5888849014502586331}
   m_Layer: 0
   m_Name: ShopManager
   m_TagString: Untagged
@@ -43,10 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d13d697515f51a4468c9f1be29c5462d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testCurrency: 1000
-  testSpecialCurrency: 2
   testCurrencyText: {fileID: 0}
-  testSpecialCurrencyText: {fileID: 0}
   heatControl: {fileID: 0}
   myPurchaseButtons:
   - {fileID: 0}
@@ -60,3 +58,23 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &5888849014502586331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8689504027251042272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83def447461d1fc408c045902f1a784b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopManager: {fileID: 0}
+  lunchBagPurchased: 0
+  StyrofoamBagPurchased: 0
+  PremiumBagPurchased: 0
+  wackAssEquiped: 0
+  lunchBagEquiped: 0
+  StyrofoamBagEquiped: 0
+  PremiumBagEquiped: 0
