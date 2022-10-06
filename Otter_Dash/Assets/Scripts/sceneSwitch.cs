@@ -58,6 +58,7 @@ public class sceneSwitch : MonoBehaviour
     public void back_to_main_menu()
     {
         Time.timeScale = 1;
+        AudioListener.pause = false;
         i = 0;
         LoadScene(i);
     }
