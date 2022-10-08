@@ -263,6 +263,18 @@ namespace VehicleBehaviour {
         // Visual feedbacks and boost regen
         void Update()
         {
+            
+            if (Input.GetKeyDown(KeyCode.LeftAlt) && !mouseUnlocked)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
+                mouseUnlocked = true;
+            }else if (Input.GetKeyDown(KeyCode.LeftAlt) && mouseUnlocked)
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                mouseUnlocked = false;
+            }
             speedText.text = "Speed: " + Math.Floor(rb.velocity.magnitude);
             foreach (ParticleSystem gasParticle in gasParticles)
             {
@@ -280,17 +292,7 @@ namespace VehicleBehaviour {
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftAlt) && !mouseUnlocked)
-            {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.Confined;
-                mouseUnlocked = true;
-            }else if (Input.GetKeyDown(KeyCode.LeftAlt) && mouseUnlocked)
-            {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-                mouseUnlocked = false;
-            }
+            
             // Mesure current speed
             speed = transform.InverseTransformDirection(rb.velocity).z * 3.6f;
 
